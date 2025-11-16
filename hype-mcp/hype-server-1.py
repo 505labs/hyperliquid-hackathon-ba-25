@@ -5,10 +5,7 @@ Implements Tier 1 tools for Hyperliquid chain analysis using Lava RPC endpoints.
 
 import os
 import time
-import json
 from typing import Any, Dict, List, Optional, Union
-from mcp.server.fastmcp import FastMCP
-import httpx
 
 # Try to load .env file if python-dotenv is available
 try:
@@ -20,12 +17,17 @@ except ImportError:
     print("  Install with: uv add python-dotenv")
     print("  Or set environment variables directly")
 
+import httpx
+from mcp.server.fastmcp import FastMCP
+from hyperliquid_log_processor import CoreWriterLogProcessor
+from hyperliquid import info
 # Create an MCP server
 mcp = FastMCP("Hyperliquid Lava RPC")
 
 # Configuration
 LAVA_RPC_URL = os.getenv("LAVA_RPC_URL", "https://eth1.lava.build/lava-referer-8b51600b-b188-4c52-8c57-c65d3a9be5af/")
 NETWORK = os.getenv("HYPERLIQUID_NETWORK", "mainnet")  # mainnet or testnet
+
 
 # Simple cache for chainId and gasPrice
 _cache: Dict[str, tuple[Any, float]] = {}
@@ -757,3 +759,254 @@ async def get_fee_history(
     
     execution_time = (time.time() - start_time) * 1000
     return format_response(data, rpc_calls, execution_time, cached=False, errors=errors if errors else None)
+
+@mcp.tool()
+async def get_core_writer_logs(start_block: int, end_block: int) -> Dict[str, Any]:
+    """
+    Get CoreWriter logs from start block to end block.
+    CoreWriter is the contract that writes the Limit order/Vault transfer/Token delegate/Staking deposit/Staking withdraw/Spot send/USD class transfer/Finalize evm contract/Add api wallet/Cancel order by oid/Cancel order by cloid/Approve builder fee/Send asset/Reflect evm supply change logs.
+    """
+    start_time = time.time()
+    processor = CoreWriterLogProcessor()
+    logs = processor.process_logs(start_block, end_block)
+    return format_response(logs, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+    # INSERT_YOUR_CODE
+
+# Expose all fundamental info endpoints from info.py
+hl_info = info.Info()
+
+@mcp.tool()
+async def get_open_orders(address: str, dex: str = "") -> Dict[str, Any]:
+    """
+    Get a user's open orders.
+    """
+    start_time = time.time()
+    result = hl_info.open_orders(address, dex)
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_frontend_open_orders(address: str, dex: str = "") -> Dict[str, Any]:
+    """
+    Get a user's frontend open orders.
+    """
+    start_time = time.time()
+    result = hl_info.frontend_open_orders(address, dex)
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_user_fills(address: str) -> Dict[str, Any]:
+    """
+    Get a user's fills.
+    """
+    start_time = time.time()
+    result = hl_info.user_fills(address)
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_user_fills_by_time(address: str, start_time_ms: int, end_time_ms: int = None, aggregate_by_time: bool = False) -> Dict[str, Any]:
+    """
+    Get a user's fills by time.
+    """
+    st = time.time()
+    result = hl_info.user_fills_by_time(address, start_time_ms, end_time=end_time_ms, aggregate_by_time=aggregate_by_time)
+    return format_response(result, 1, (time.time() - st) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_portfolio(address: str) -> Dict[str, Any]:
+    """
+    Get a user's portfolio performance data.
+    """
+    start_time = time.time()
+    result = hl_info.portfolio(address)
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_clearinghouse_state(address: str, dex: str = "") -> Dict[str, Any]:
+    """
+    Get a user's clearinghouse state (margin/account).
+    """
+    start_time = time.time()
+    result = hl_info.user_state(address, dex)
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_spot_user_state(address: str) -> Dict[str, Any]:
+    """
+    Get a user's spot clearinghouse state.
+    """
+    start_time = time.time()
+    result = hl_info.spot_user_state(address)
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_historical_orders(address: str) -> Dict[str, Any]:
+    """
+    Get a user's historical orders.
+    """
+    start_time = time.time()
+    result = hl_info.historical_orders(address)
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_user_vault_equities(address: str) -> Dict[str, Any]:
+    """
+    Get a user's vault equities.
+    """
+    start_time = time.time()
+    result = hl_info.user_vault_equities(address)
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_user_fees(address: str) -> Dict[str, Any]:
+    """
+    Get trading volume and fee schedule for a user.
+    """
+    start_time = time.time()
+    result = hl_info.user_fees(address)
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_user_staking_summary(address: str) -> Dict[str, Any]:
+    """
+    Get staking summary for a user.
+    """
+    start_time = time.time()
+    result = hl_info.user_staking_summary(address)
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_user_staking_delegations(address: str) -> Dict[str, Any]:
+    """
+    Get staking delegations for a user.
+    """
+    start_time = time.time()
+    result = hl_info.user_staking_delegations(address)
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_user_staking_rewards(address: str) -> Dict[str, Any]:
+    """
+    Get historic staking rewards for a user.
+    """
+    start_time = time.time()
+    result = hl_info.user_staking_rewards(address)
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_delegator_summary(address: str) -> Dict[str, Any]:
+    """
+    Get staking delegator summary for a user.
+    """
+    start_time = time.time()
+    result = hl_info.user_staking_summary(address)
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_delegator_history(address: str) -> Dict[str, Any]:
+    """
+    Get comprehensive staking history for a user.
+    """
+    start_time = time.time()
+    result = hl_info.delegator_history(address)
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_extra_agents(address: str) -> Dict[str, Any]:
+    """
+    Get extra agents associated with a user.
+    """
+    start_time = time.time()
+    result = hl_info.extra_agents(address)
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_meta(dex: str = "") -> Dict[str, Any]:
+    """
+    Get perp meta for the dex.
+    """
+    start_time = time.time()
+    result = hl_info.meta(dex)
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_meta_and_asset_ctxs() -> Dict[str, Any]:
+    """
+    Get full meta and asset contexts.
+    """
+    start_time = time.time()
+    result = hl_info.meta_and_asset_ctxs()
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_perp_dexs() -> Dict[str, Any]:
+    """
+    Get list of perp dexs on Hyperliquid.
+    """
+    start_time = time.time()
+    result = hl_info.perp_dexs()
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_spot_meta() -> Dict[str, Any]:
+    """
+    Get Hyperliquid spot metadata.
+    """
+    start_time = time.time()
+    result = hl_info.spot_meta()
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_spot_meta_and_asset_ctxs() -> Dict[str, Any]:
+    """
+    Get Hyperliquid spot meta and asset contexts.
+    """
+    start_time = time.time()
+    result = hl_info.spot_meta_and_asset_ctxs()
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_funding_history(name: str, start_time_ms: int, end_time_ms: int = None) -> Dict[str, Any]:
+    """
+    Get funding history for a coin.
+    """
+    start_time = time.time()
+    result = hl_info.funding_history(name, start_time_ms, end_time_ms)
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_user_funding_history(address: str, start_time_ms: int, end_time_ms: int = None) -> Dict[str, Any]:
+    """
+    Get funding history for a user.
+    """
+    start_time = time.time()
+    result = hl_info.user_funding_history(address, start_time_ms, end_time_ms)
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_l2_snapshot(name: str) -> Dict[str, Any]:
+    """
+    Get L2 snapshot for a coin.
+    """
+    start_time = time.time()
+    result = hl_info.l2_snapshot(name)
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_candles_snapshot(name: str, interval: str, start_time_ms: int, end_time_ms: int) -> Dict[str, Any]:
+    """
+    Get candles snapshot for a coin.
+    """
+    start_time = time.time()
+    result = hl_info.candles_snapshot(name, interval, start_time_ms, end_time_ms)
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+
+@mcp.tool()
+async def get_all_mids(dex: str = "") -> Dict[str, Any]:
+    """
+    Get all mids for actively traded coins.
+    """
+    start_time = time.time()
+    result = hl_info.all_mids(dex)
+    return format_response(result, 1, (time.time() - start_time) * 1000, cached=False, errors=None)
+

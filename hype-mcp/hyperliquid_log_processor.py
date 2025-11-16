@@ -158,7 +158,7 @@ if __name__ == "__main__":
     print("Fetching logs from block 0x1263528 to 0x1265c38...")
 
     processor = CoreWriterLogProcessor()
-    start_block = 0x1263528
+    start_block = 0x1223528
     end_block = 0x1265c38
     batch_size = 1000
 
