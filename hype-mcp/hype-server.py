@@ -40,10 +40,58 @@ mcp = FastMCP("Hyperliquid Vault Server")
 # Hardcoded list of known vault addresses
 # TODO: This should be populated from actual on-chain data or configuration
 KNOWN_VAULT_ADDRESSES = [
-    "0x1234567890123456789012345678901234567890",
-    "0xabcdefabcdefabcdefabcdefabcdefabcdefabcd",
-    "0x9876543210987654321098765432109876543210",
 ]
+
+
+def format_response(
+    data: Any,
+    rpc_calls: int = 1,
+    execution_time_ms: float = 0,
+    cached: bool = False,
+    errors: Optional[List[str]] = None
+) -> Dict[str, Any]:
+    """Format response according to spec."""
+    return {
+        "success": errors is None or len(errors) == 0,
+        "data": data,
+        "metadata": {
+            "rpc_calls": rpc_calls,
+            "execution_time": execution_time_ms,
+            "cached": cached
+        },
+        "errors": errors if errors else None
+    }
+
+
+def normalize_block(block: Union[str, int]) -> str:
+    """Normalize block identifier to hex string."""
+    if isinstance(block, str):
+        if block.startswith("0x"):
+            return block
+        elif block in ["latest", "earliest", "pending"]:
+            return block
+        else:
+            try:
+                return hex(int(block))
+            except ValueError:
+                return block
+    else:
+        return hex(int(block))
+
+
+def normalize_address(address: str) -> str:
+    """Normalize address to 0x-prefixed hex string."""
+    if not address.startswith("0x"):
+        return "0x" + address
+    return address
+
+
+def hex_to_int(hex_str: str) -> int:
+    """Convert hex string to integer."""
+    if isinstance(hex_str, str):
+        return int(hex_str, 16) if hex_str.startswith("0x") else int(hex_str)
+    return hex_str
+
 
 
 def format_response(
@@ -381,3 +429,110 @@ def get_delegation_info() -> Dict[str, Any]:
     
     execution_time = (time.time() - start_time) * 1000
     return format_response(data, execution_time, errors if errors else None)
+
+
+
+@mcp.tool()
+async def get_account_activity(
+    address: str,
+    start_block: Union[str, int],
+    end_block: Union[str, int] = "latest"
+) -> Dict[str, Any]:
+    """
+    Scan block range for all transactions involving address.
+    
+    Args:
+        address: Account address (0x-prefixed hex string)
+        start_block: Starting block number
+        end_block: Ending block number or "latest" (default: "latest")
+    """
+
+    logger.info(f"1111111111111: {address}")
+
+    start_time = time.time()
+    rpc = await get_rpc_client()
+    errors = []
+    data = {
+        "transactions": [],
+        "sent": [],
+        "received": []
+    }
+    rpc_calls = 0
+    
+    logger.info(f"HEREE!!!!!")
+
+    try:
+        address = normalize_address(address)
+        start_block_norm = normalize_block(start_block)
+        end_block_norm = normalize_block(end_block)
+        
+        # Get end block number if "latest"
+        if end_block_norm == "latest":
+            latest_block_data = await rpc.call("eth_getBlockByNumber", ["latest", False])
+            rpc_calls += 1
+            end_block_num = hex_to_int(latest_block_data.get("number", "0x0"))
+        else:
+            end_block_num = hex_to_int(end_block_norm)
+        
+        start_block_num = hex_to_int(start_block_norm) if start_block_norm not in ["latest", "earliest", "pending"] else 0
+        
+        # Limit block range to prevent excessive RPC calls
+        max_blocks = 1000
+        if end_block_num - start_block_num > max_blocks:
+            end_block_num = start_block_num + max_blocks
+        
+        # Scan blocks (sample every Nth block to avoid too many calls)
+        step = max(1, (end_block_num - start_block_num) // 100)  # Sample up to 100 blocks
+        
+        for block_num in range(start_block_num, end_block_num + 1, step):
+            block_hex = hex(block_num)
+            block = await rpc.call("eth_getBlockByNumber", [block_hex, True])
+            rpc_calls += 1
+            
+            if block and "transactions" in block:
+                for tx in block["transactions"]:
+                    if isinstance(tx, dict):
+                        tx_from = (tx.get("from") or "").lower()
+                        tx_to = (tx.get("to") or "").lower()
+                        address_lower = address.lower()
+
+                        logger.info(f"tx_from: {tx_from}")
+                        logger.info(f"tx_to: {tx_to}")
+                        logger.info(f"address_lower: {address_lower}")
+                        
+                        if tx_from == address_lower or tx_to == address_lower:
+                            tx_data = {
+                                "hash": tx.get("hash"),
+                                "blockNumber": hex_to_int(tx.get("blockNumber", "0x0")),
+                                "from": tx.get("from"),
+                                "to": tx.get("to"),
+                                "value": hex_to_int(tx.get("value", "0x0")),
+                                "gas": hex_to_int(tx.get("gas", "0x0")),
+                                "gasPrice": hex_to_int(tx.get("gasPrice", "0x0")),
+                                "nonce": hex_to_int(tx.get("nonce", "0x0")),
+                                "direction": "sent" if tx_from == address_lower else "received"
+                            }
+                            data["transactions"].append(tx_data)
+                            
+                            if tx_from == address_lower:
+                                data["sent"].append(tx_data)
+                            if tx_to == address_lower:
+                                data["received"].append(tx_data)
+        
+        data["address"] = address
+        data["blockRange"] = {
+            "start": start_block_num,
+            "end": end_block_num,
+            "blocksScanned": len(range(start_block_num, end_block_num + 1, step))
+        }
+        data["summary"] = {
+            "totalTransactions": len(data["transactions"]),
+            "sentCount": len(data["sent"]),
+            "receivedCount": len(data["received"])
+        }
+        
+    except Exception as e:
+        errors.append(str(e))
+    
+    execution_time = (time.time() - start_time) * 1000
+    return format_response(data, rpc_calls, execution_time, cached=False, errors=errors if errors else None)
