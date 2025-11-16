@@ -10,6 +10,16 @@ from typing import Any, Dict, List, Optional, Union
 from mcp.server.fastmcp import FastMCP
 import httpx
 
+# Try to load .env file if python-dotenv is available
+try:
+    from dotenv import load_dotenv
+    load_dotenv()  # This loads variables from .env file
+    print("✓ Loaded .env file")
+except ImportError:
+    print("⚠ python-dotenv not installed - .env file won't be loaded")
+    print("  Install with: uv add python-dotenv")
+    print("  Or set environment variables directly")
+
 # Create an MCP server
 mcp = FastMCP("Hyperliquid Lava RPC")
 

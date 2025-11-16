@@ -142,6 +142,62 @@ This is a Tier 1 implementation. Future enhancements will include:
 - Tier 2: Compound actions (transaction management, account analysis, etc.)
 - Tier 3: Agent-friendly workflows (monitoring, validation, reporting)
 
+## Testing
+
+The project includes comprehensive integration tests for all Tier 2 and Tier 3 (Demo) tools using pytest with **actual Lava RPC endpoints**.
+
+### Install Test Dependencies
+
+```bash
+uv sync --extra test
+```
+
+### Configure RPC Endpoint
+
+Set the Lava RPC URL (optional, uses default if not set):
+
+```bash
+export LAVA_RPC_URL="https://your-lava-rpc-endpoint"
+```
+
+### Run Tests
+
+```bash
+# Run all tests
+uv run pytest
+
+# Run with verbose output
+uv run pytest -v
+
+# Run a specific test file
+uv run pytest test_tier2.py
+uv run pytest test_tier3.py
+
+# Run a specific test
+uv run pytest test_tier2.py::test_wait_for_transaction_confirmation_success
+uv run pytest test_tier3.py::test_get_top_profitable_traders_basic
+
+# Run with coverage
+uv run pytest --cov=hype-server-2 --cov-report=html
+```
+
+### Test Structure
+
+Tests use **real RPC calls** to actual Lava endpoints:
+- All tests make actual network requests to Lava RPC
+- Tests use real transaction hashes, addresses, and blocks from the chain
+- Tests automatically discover test data from recent blocks
+- Tests verify response format and data structure with real data
+- Helper functions are tested independently
+- Tests gracefully skip if RPC is unavailable or data is not found
+
+**Note**: These are integration tests that require network access. Tests will skip if the RPC endpoint is unavailable.
+
+### Test Files
+
+- `test_tier2.py` - Tests for Tier 2 compound action tools
+- `test_tier3.py` - Tests for Tier 3 demo tools (top traders, monitoring)
+
 ## License
 
 MIT
