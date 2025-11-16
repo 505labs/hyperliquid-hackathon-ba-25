@@ -1,0 +1,1340 @@
+[
+    {
+        "validator": "0xc75a3fc98b0e1af7a95b6a720adf2e23806d2c7b",
+        "isUndelegate": true,
+        "wei": 4814915904569,
+        "transaction_hash": "0x3f56657d519c13bc7e5be3a6833080da4fd6e91629a704c53f8fe75ad6f46797"
+    },
+    {
+        "validator": "0x000000000056f99d36b6f2e0c51fd41496bbacb8",
+        "isUndelegate": false,
+        "wei": 347329162372,
+        "transaction_hash": "0x96c235923d8ebbb2034c39742906924ffba6351e33351e9123a7580dbdf23744"
+    },
+    {
+        "validator": "0x65baa675fa9e5f6c7ae4541ebdb16c526de06f1f",
+        "isUndelegate": false,
+        "wei": 327780564455,
+        "transaction_hash": "0x426ca51fd5fbdef6479d3e43fcf73bef4570f77a9a18da68137f07551d3bb1de"
+    },
+    {
+        "validator": "0xb00c116f72eb55f52ca80196b63014a42cc72de1",
+        "isUndelegate": false,
+        "wei": 324923130765,
+        "transaction_hash": "0x0985d65403eebb7aabaaeb2f06abce27e15a10dc4ee6b75af23085887886b115"
+    },
+    {
+        "validator": "0xf8efb4cb844a8458114994203d7b0bfe2422a288",
+        "isUndelegate": false,
+        "wei": 316705008310,
+        "transaction_hash": "0xf83785a159f6a49d86242d35949ecd1d259d64b4f1be743f0a1ae0bdb9c6d2cc"
+    },
+    {
+        "validator": "0xe45c96a6a32318e5df7347477963bf0de38ff7ff",
+        "isUndelegate": false,
+        "wei": 271560198740,
+        "transaction_hash": "0x9a384890718c348c00579a6427a22057ae21ebd51d13df36c37ed68d6e0e2460"
+    },
+    {
+        "validator": "0x15458aed3c7a49b215fbfa863c6ff550c31e1a31",
+        "isUndelegate": false,
+        "wei": 271514167749,
+        "transaction_hash": "0xd7436c4b5520a6fc7f9e81b868c7ff46e5202fddbdb023abca84890d480376fc"
+    },
+    {
+        "validator": "0xeeee86f718f9da3e7250624a460f6ea710e9c006",
+        "isUndelegate": false,
+        "wei": 271437312556,
+        "transaction_hash": "0x66a6f3ced19a796a4fd20cd28df9cc341de5125fc845aacbacbfdd3a4d8f984a"
+    },
+    {
+        "validator": "0x8a5dbdf69b282bf2e8fb9f29fd34891f79c5dfd4",
+        "isUndelegate": false,
+        "wei": 271390654126,
+        "transaction_hash": "0x9c32b8d91f2a4a0b48d9b0a8015df6a0757dfe3fa8a7b59ecf62e911b730b599"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": false,
+        "wei": 271329250933,
+        "transaction_hash": "0x7444abaeb6d2deddccbfa000f52d2c0bd2065c15f264fc6703fd309ae44a8450"
+    },
+    {
+        "validator": "0x48f1da3e3ec2814fbb3dcf57125001089b067402",
+        "isUndelegate": false,
+        "wei": 271296539873,
+        "transaction_hash": "0xedaaefa2a77ce55e0091aa0eee3a55b86fb644912b46058b237eb2fae3a6f50c"
+    },
+    {
+        "validator": "0xabcdeff4b3727b83a23697500eef089020df2cd2",
+        "isUndelegate": false,
+        "wei": 271270498088,
+        "transaction_hash": "0xdaa2876693dfc538443d8e45659a5469eba241c182c035a9887635b51989a983"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": false,
+        "wei": 271237521654,
+        "transaction_hash": "0x11d7a2f877a6d0836ff76f1696573eee27a54010f2cb6874ee461653a56b3e76"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": false,
+        "wei": 271198400629,
+        "transaction_hash": "0x6621b81999784dc2970af8d19bd10b516bd5401466b88bae94bdae0da4da50d9"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": false,
+        "wei": 271193445996,
+        "transaction_hash": "0xffe30a8c77215f2b807ed85256025c43c625c7e7ad2a74acbd4a5b46c7dbd597"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": false,
+        "wei": 271172096140,
+        "transaction_hash": "0xa93df8b643acff0a90ec7301b38a6aecff43f866f90929b73522604c053ae474"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": false,
+        "wei": 185874578935,
+        "transaction_hash": "0x462ae7c77dce1b88bee3b18ddad847139490b03e308c81a2884da56cd00d9ef4"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": false,
+        "wei": 1406250000,
+        "transaction_hash": "0xb1af996dad30679a53d64dfcedb2384cf028e232066aabbba16565cb172a81e7"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": false,
+        "wei": 1406250000,
+        "transaction_hash": "0xb1af996dad30679a53d64dfcedb2384cf028e232066aabbba16565cb172a81e7"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": false,
+        "wei": 468750000,
+        "transaction_hash": "0xb1af996dad30679a53d64dfcedb2384cf028e232066aabbba16565cb172a81e7"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": false,
+        "wei": 1406250000,
+        "transaction_hash": "0xb1af996dad30679a53d64dfcedb2384cf028e232066aabbba16565cb172a81e7"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": false,
+        "wei": 1406250000,
+        "transaction_hash": "0xb1af996dad30679a53d64dfcedb2384cf028e232066aabbba16565cb172a81e7"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": false,
+        "wei": 1406250000,
+        "transaction_hash": "0xb1af996dad30679a53d64dfcedb2384cf028e232066aabbba16565cb172a81e7"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": false,
+        "wei": 1584884,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": false,
+        "wei": 1585190,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": false,
+        "wei": 1573866,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": false,
+        "wei": 1585871,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": false,
+        "wei": 1584687,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0xabcdeff4b3727b83a23697500eef089020df2cd2",
+        "isUndelegate": false,
+        "wei": 1604467,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0xf8efb4cb844a8458114994203d7b0bfe2422a288",
+        "isUndelegate": false,
+        "wei": 1620582,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0x497beec89958848126c2ea65934ce430e1410ad2",
+        "isUndelegate": false,
+        "wei": 1088034,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": false,
+        "wei": 1082792,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0x48f1da3e3ec2814fbb3dcf57125001089b067402",
+        "isUndelegate": false,
+        "wei": 1096428,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0x5ac99df645f3414876c816caa18b2d234024b487",
+        "isUndelegate": false,
+        "wei": 1097240,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0x65baa675fa9e5f6c7ae4541ebdb16c526de06f1f",
+        "isUndelegate": false,
+        "wei": 1096530,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0x66be52ec79f829cc88e5778a255e2cb9492798fd",
+        "isUndelegate": false,
+        "wei": 1095852,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0x80f0cd23da5bf3a0101110cfd0f89c8a69a1384d",
+        "isUndelegate": false,
+        "wei": 1097238,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0x8a5dbdf69b282bf2e8fb9f29fd34891f79c5dfd4",
+        "isUndelegate": false,
+        "wei": 1096198,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0xa82fe73bbd768bc15d1ef2f6142a21ff8bd762ad",
+        "isUndelegate": false,
+        "wei": 1098357,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0xb00c116f72eb55f52ca80196b63014a42cc72de1",
+        "isUndelegate": false,
+        "wei": 1097136,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0xdf35aee8ef5658686142acd1e5ab5dbcdf8c51e8",
+        "isUndelegate": false,
+        "wei": 1095418,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0x000000000056f99d36b6f2e0c51fd41496bbacb8",
+        "isUndelegate": false,
+        "wei": 1109660,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0xe45c96a6a32318e5df7347477963bf0de38ff7ff",
+        "isUndelegate": false,
+        "wei": 560712,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0x15458aed3c7a49b215fbfa863c6ff550c31e1a31",
+        "isUndelegate": false,
+        "wei": 561390,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0xc75a3fc98b0e1af7a95b6a720adf2e23806d2c7b",
+        "isUndelegate": false,
+        "wei": 1145348,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0x30c66ebc7f5ef4f340b424a26e4d944f60129815",
+        "isUndelegate": false,
+        "wei": 1187461,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0xeeee86f718f9da3e7250624a460f6ea710e9c006",
+        "isUndelegate": false,
+        "wei": 554646,
+        "transaction_hash": "0xdd56f0eb4b24b58c991204c26972735ba15fd4f9b39ab1c25dcb4a23139cc231"
+    },
+    {
+        "validator": "0xeeee86f718f9da3e7250624a460f6ea710e9c006",
+        "isUndelegate": true,
+        "wei": 65486674717549,
+        "transaction_hash": "0xc6835906fb443315f8f6b839708b582abaffab3d782dac2c91bc02f7650ce44e"
+    },
+    {
+        "validator": "0x5ac99df645f3414876c816caa18b2d234024b487",
+        "isUndelegate": true,
+        "wei": 6368351785885,
+        "transaction_hash": "0xc6835906fb443315f8f6b839708b582abaffab3d782dac2c91bc02f7650ce44e"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": true,
+        "wei": 6369397501894,
+        "transaction_hash": "0xc6835906fb443315f8f6b839708b582abaffab3d782dac2c91bc02f7650ce44e"
+    },
+    {
+        "validator": "0x80f0cd23da5bf3a0101110cfd0f89c8a69a1384d",
+        "isUndelegate": true,
+        "wei": 6368351731125,
+        "transaction_hash": "0xc6835906fb443315f8f6b839708b582abaffab3d782dac2c91bc02f7650ce44e"
+    },
+    {
+        "validator": "0xdf35aee8ef5658686142acd1e5ab5dbcdf8c51e8",
+        "isUndelegate": true,
+        "wei": 6368378644583,
+        "transaction_hash": "0xc6835906fb443315f8f6b839708b582abaffab3d782dac2c91bc02f7650ce44e"
+    },
+    {
+        "validator": "0xa82fe73bbd768bc15d1ef2f6142a21ff8bd762ad",
+        "isUndelegate": true,
+        "wei": 6368337510113,
+        "transaction_hash": "0xc6835906fb443315f8f6b839708b582abaffab3d782dac2c91bc02f7650ce44e"
+    },
+    {
+        "validator": "0xeeee86f718f9da3e7250624a460f6ea710e9c006",
+        "isUndelegate": true,
+        "wei": 220998972716632,
+        "transaction_hash": "0xc6835906fb443315f8f6b839708b582abaffab3d782dac2c91bc02f7650ce44e"
+    },
+    {
+        "validator": "0x8a5dbdf69b282bf2e8fb9f29fd34891f79c5dfd4",
+        "isUndelegate": true,
+        "wei": 6368361517587,
+        "transaction_hash": "0xc6835906fb443315f8f6b839708b582abaffab3d782dac2c91bc02f7650ce44e"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": true,
+        "wei": 6368721217520,
+        "transaction_hash": "0xc6835906fb443315f8f6b839708b582abaffab3d782dac2c91bc02f7650ce44e"
+    },
+    {
+        "validator": "0x66be52ec79f829cc88e5778a255e2cb9492798fd",
+        "isUndelegate": true,
+        "wei": 6368366194532,
+        "transaction_hash": "0xc6835906fb443315f8f6b839708b582abaffab3d782dac2c91bc02f7650ce44e"
+    },
+    {
+        "validator": "0xabcdeff4b3727b83a23697500eef089020df2cd2",
+        "isUndelegate": true,
+        "wei": 6369062857419,
+        "transaction_hash": "0xc6835906fb443315f8f6b839708b582abaffab3d782dac2c91bc02f7650ce44e"
+    },
+    {
+        "validator": "0xeeee86f718f9da3e7250624a460f6ea710e9c006",
+        "isUndelegate": false,
+        "wei": 6132747970465,
+        "transaction_hash": "0xc6835906fb443315f8f6b839708b582abaffab3d782dac2c91bc02f7650ce44e"
+    },
+    {
+        "validator": "0xeeee86f718f9da3e7250624a460f6ea710e9c006",
+        "isUndelegate": false,
+        "wei": 278316301677290,
+        "transaction_hash": "0xc6835906fb443315f8f6b839708b582abaffab3d782dac2c91bc02f7650ce44e"
+    },
+    {
+        "validator": "0x5ac99df645f3414876c816caa18b2d234024b487",
+        "isUndelegate": false,
+        "wei": 126599642697,
+        "transaction_hash": "0xc5dc0be1458e29f6a4cc24cbbee6e67534e981731fd4ee775c234a07489ed552"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": false,
+        "wei": 4651765,
+        "transaction_hash": "0x54b16ab5d381fe208d3d687bfa8c24d095986206987cb831f62ff1d6d5a0e2bf"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": false,
+        "wei": 4651765,
+        "transaction_hash": "0x54b16ab5d381fe208d3d687bfa8c24d095986206987cb831f62ff1d6d5a0e2bf"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": false,
+        "wei": 1550588,
+        "transaction_hash": "0x54b16ab5d381fe208d3d687bfa8c24d095986206987cb831f62ff1d6d5a0e2bf"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": false,
+        "wei": 4651765,
+        "transaction_hash": "0x54b16ab5d381fe208d3d687bfa8c24d095986206987cb831f62ff1d6d5a0e2bf"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": false,
+        "wei": 4651765,
+        "transaction_hash": "0x54b16ab5d381fe208d3d687bfa8c24d095986206987cb831f62ff1d6d5a0e2bf"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": false,
+        "wei": 4651768,
+        "transaction_hash": "0x54b16ab5d381fe208d3d687bfa8c24d095986206987cb831f62ff1d6d5a0e2bf"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": false,
+        "wei": 16683300000,
+        "transaction_hash": "0x6557aea4022d85ee3c91da046116eb1eef48bff63798ba4e217e3e72bd387dc6"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": false,
+        "wei": 9990000000,
+        "transaction_hash": "0xb66659a7bff3724175c97b25ab5f4133f13833cd98a0013257796e11960bfc4e"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": false,
+        "wei": 937500,
+        "transaction_hash": "0x9bcc1c9e2a84cfdb4c57270d450335e3356974ebe55feab6bc6016ac690780e5"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": false,
+        "wei": 937500,
+        "transaction_hash": "0x9bcc1c9e2a84cfdb4c57270d450335e3356974ebe55feab6bc6016ac690780e5"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": false,
+        "wei": 312500,
+        "transaction_hash": "0x9bcc1c9e2a84cfdb4c57270d450335e3356974ebe55feab6bc6016ac690780e5"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": false,
+        "wei": 937500,
+        "transaction_hash": "0x9bcc1c9e2a84cfdb4c57270d450335e3356974ebe55feab6bc6016ac690780e5"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": false,
+        "wei": 937500,
+        "transaction_hash": "0x9bcc1c9e2a84cfdb4c57270d450335e3356974ebe55feab6bc6016ac690780e5"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": false,
+        "wei": 937500,
+        "transaction_hash": "0x9bcc1c9e2a84cfdb4c57270d450335e3356974ebe55feab6bc6016ac690780e5"
+    },
+    {
+        "validator": "0x950f8dd5e5030e1fa6ad2cdc4295809d185925d0",
+        "isUndelegate": true,
+        "wei": 40053265313613,
+        "transaction_hash": "0xafb844a1c88c4221f619289e908f9411a31746b0965c62950d3d121ae394994a"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": true,
+        "wei": 18227196498229,
+        "transaction_hash": "0xafb844a1c88c4221f619289e908f9411a31746b0965c62950d3d121ae394994a"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": true,
+        "wei": 6036061962,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": true,
+        "wei": 6036081366,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": true,
+        "wei": 6036087163,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": true,
+        "wei": 6036191041,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": true,
+        "wei": 6036083669,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0xabcdeff4b3727b83a23697500eef089020df2cd2",
+        "isUndelegate": true,
+        "wei": 6036062656,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0xf8efb4cb844a8458114994203d7b0bfe2422a288",
+        "isUndelegate": true,
+        "wei": 6036047482,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0x497beec89958848126c2ea65934ce430e1410ad2",
+        "isUndelegate": true,
+        "wei": 4024029567,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": true,
+        "wei": 4024030765,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0x48f1da3e3ec2814fbb3dcf57125001089b067402",
+        "isUndelegate": true,
+        "wei": 4024014013,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0x5ac99df645f3414876c816caa18b2d234024b487",
+        "isUndelegate": true,
+        "wei": 4024015032,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0x65baa675fa9e5f6c7ae4541ebdb16c526de06f1f",
+        "isUndelegate": true,
+        "wei": 4024014995,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0x66be52ec79f829cc88e5778a255e2cb9492798fd",
+        "isUndelegate": true,
+        "wei": 4024016314,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0x80f0cd23da5bf3a0101110cfd0f89c8a69a1384d",
+        "isUndelegate": true,
+        "wei": 4024015293,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0x8a5dbdf69b282bf2e8fb9f29fd34891f79c5dfd4",
+        "isUndelegate": true,
+        "wei": 4024017051,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0xa82fe73bbd768bc15d1ef2f6142a21ff8bd762ad",
+        "isUndelegate": true,
+        "wei": 4024015280,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0xb00c116f72eb55f52ca80196b63014a42cc72de1",
+        "isUndelegate": true,
+        "wei": 4024015069,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0xdf35aee8ef5658686142acd1e5ab5dbcdf8c51e8",
+        "isUndelegate": true,
+        "wei": 4024015426,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0x000000000056f99d36b6f2e0c51fd41496bbacb8",
+        "isUndelegate": true,
+        "wei": 4024001894,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0xe45c96a6a32318e5df7347477963bf0de38ff7ff",
+        "isUndelegate": true,
+        "wei": 2011995150,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0x15458aed3c7a49b215fbfa863c6ff550c31e1a31",
+        "isUndelegate": true,
+        "wei": 2011993465,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0xc75a3fc98b0e1af7a95b6a720adf2e23806d2c7b",
+        "isUndelegate": true,
+        "wei": 2011372419,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0x30c66ebc7f5ef4f340b424a26e4d944f60129815",
+        "isUndelegate": true,
+        "wei": 2011371987,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0xeeee86f718f9da3e7250624a460f6ea710e9c006",
+        "isUndelegate": true,
+        "wei": 2012001271,
+        "transaction_hash": "0xc30c056b444b49c8dcbe82a5ec325449e871e4cc46585285f2b38f2d5dbd26bb"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": false,
+        "wei": 29158548,
+        "transaction_hash": "0x7473e18b912e90778c79df179b3213e34bdebb2c23fe3fa725dd1502b36874f6"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": false,
+        "wei": 29158548,
+        "transaction_hash": "0x7473e18b912e90778c79df179b3213e34bdebb2c23fe3fa725dd1502b36874f6"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": false,
+        "wei": 9719516,
+        "transaction_hash": "0x7473e18b912e90778c79df179b3213e34bdebb2c23fe3fa725dd1502b36874f6"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": false,
+        "wei": 29158548,
+        "transaction_hash": "0x7473e18b912e90778c79df179b3213e34bdebb2c23fe3fa725dd1502b36874f6"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": false,
+        "wei": 29158548,
+        "transaction_hash": "0x7473e18b912e90778c79df179b3213e34bdebb2c23fe3fa725dd1502b36874f6"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": false,
+        "wei": 29158550,
+        "transaction_hash": "0x7473e18b912e90778c79df179b3213e34bdebb2c23fe3fa725dd1502b36874f6"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": true,
+        "wei": 94576492,
+        "transaction_hash": "0x6e1563eab54c8bd87722348f87a38684dfedaf8c7e05b880cf3092d2c169e247"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": true,
+        "wei": 94576817,
+        "transaction_hash": "0x6e1563eab54c8bd87722348f87a38684dfedaf8c7e05b880cf3092d2c169e247"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": true,
+        "wei": 31489828,
+        "transaction_hash": "0x6e1563eab54c8bd87722348f87a38684dfedaf8c7e05b880cf3092d2c169e247"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": true,
+        "wei": 27196440,
+        "transaction_hash": "0x6e1563eab54c8bd87722348f87a38684dfedaf8c7e05b880cf3092d2c169e247"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": true,
+        "wei": 27195603,
+        "transaction_hash": "0x6e1563eab54c8bd87722348f87a38684dfedaf8c7e05b880cf3092d2c169e247"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": true,
+        "wei": 27196197,
+        "transaction_hash": "0x6e1563eab54c8bd87722348f87a38684dfedaf8c7e05b880cf3092d2c169e247"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": false,
+        "wei": 27037500,
+        "transaction_hash": "0xf563de62f056bf17188100b224c1d89872fd905d191596af3cc2de00620ec413"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": false,
+        "wei": 27037500,
+        "transaction_hash": "0xf563de62f056bf17188100b224c1d89872fd905d191596af3cc2de00620ec413"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": false,
+        "wei": 9012500,
+        "transaction_hash": "0xf563de62f056bf17188100b224c1d89872fd905d191596af3cc2de00620ec413"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": false,
+        "wei": 27037500,
+        "transaction_hash": "0xf563de62f056bf17188100b224c1d89872fd905d191596af3cc2de00620ec413"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": false,
+        "wei": 27037500,
+        "transaction_hash": "0xf563de62f056bf17188100b224c1d89872fd905d191596af3cc2de00620ec413"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": false,
+        "wei": 27037500,
+        "transaction_hash": "0xf563de62f056bf17188100b224c1d89872fd905d191596af3cc2de00620ec413"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": false,
+        "wei": 22818750,
+        "transaction_hash": "0x8d1a50003f267cff28d05d9587106031a8853ac4b55f89c8b457b8999846d24c"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": false,
+        "wei": 22818750,
+        "transaction_hash": "0x8d1a50003f267cff28d05d9587106031a8853ac4b55f89c8b457b8999846d24c"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": false,
+        "wei": 7606250,
+        "transaction_hash": "0x8d1a50003f267cff28d05d9587106031a8853ac4b55f89c8b457b8999846d24c"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": false,
+        "wei": 22818750,
+        "transaction_hash": "0x8d1a50003f267cff28d05d9587106031a8853ac4b55f89c8b457b8999846d24c"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": false,
+        "wei": 22818750,
+        "transaction_hash": "0x8d1a50003f267cff28d05d9587106031a8853ac4b55f89c8b457b8999846d24c"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": false,
+        "wei": 22818750,
+        "transaction_hash": "0x8d1a50003f267cff28d05d9587106031a8853ac4b55f89c8b457b8999846d24c"
+    },
+    {
+        "validator": "0x5ac99df645f3414876c816caa18b2d234024b487",
+        "isUndelegate": true,
+        "wei": 3142887310931,
+        "transaction_hash": "0xf8d9e66395bbac877dcf6e9d5ddd06eb422dd9bebac7845a1624ccfaed1963d9"
+    },
+    {
+        "validator": "0xeeee86f718f9da3e7250624a460f6ea710e9c006",
+        "isUndelegate": true,
+        "wei": 181331763606413,
+        "transaction_hash": "0x6d32ab74ed6031e0664e989ced839f4dc4d862695df974ed8e1670c53db0130b"
+    },
+    {
+        "validator": "0x8a5dbdf69b282bf2e8fb9f29fd34891f79c5dfd4",
+        "isUndelegate": true,
+        "wei": 17518786470972,
+        "transaction_hash": "0x6d32ab74ed6031e0664e989ced839f4dc4d862695df974ed8e1670c53db0130b"
+    },
+    {
+        "validator": "0x5ac99df645f3414876c816caa18b2d234024b487",
+        "isUndelegate": true,
+        "wei": 17518760583215,
+        "transaction_hash": "0x6d32ab74ed6031e0664e989ced839f4dc4d862695df974ed8e1670c53db0130b"
+    },
+    {
+        "validator": "0xdf35aee8ef5658686142acd1e5ab5dbcdf8c51e8",
+        "isUndelegate": true,
+        "wei": 17518765634365,
+        "transaction_hash": "0x6d32ab74ed6031e0664e989ced839f4dc4d862695df974ed8e1670c53db0130b"
+    },
+    {
+        "validator": "0xa82fe73bbd768bc15d1ef2f6142a21ff8bd762ad",
+        "isUndelegate": true,
+        "wei": 17518763761406,
+        "transaction_hash": "0x6d32ab74ed6031e0664e989ced839f4dc4d862695df974ed8e1670c53db0130b"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": true,
+        "wei": 17519283111710,
+        "transaction_hash": "0x6d32ab74ed6031e0664e989ced839f4dc4d862695df974ed8e1670c53db0130b"
+    },
+    {
+        "validator": "0xabcdeff4b3727b83a23697500eef089020df2cd2",
+        "isUndelegate": true,
+        "wei": 17519103468714,
+        "transaction_hash": "0x6d32ab74ed6031e0664e989ced839f4dc4d862695df974ed8e1670c53db0130b"
+    },
+    {
+        "validator": "0x66be52ec79f829cc88e5778a255e2cb9492798fd",
+        "isUndelegate": true,
+        "wei": 17518777015338,
+        "transaction_hash": "0x6d32ab74ed6031e0664e989ced839f4dc4d862695df974ed8e1670c53db0130b"
+    },
+    {
+        "validator": "0x80f0cd23da5bf3a0101110cfd0f89c8a69a1384d",
+        "isUndelegate": true,
+        "wei": 17518763924102,
+        "transaction_hash": "0x6d32ab74ed6031e0664e989ced839f4dc4d862695df974ed8e1670c53db0130b"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": true,
+        "wei": 17518962338740,
+        "transaction_hash": "0x6d32ab74ed6031e0664e989ced839f4dc4d862695df974ed8e1670c53db0130b"
+    },
+    {
+        "validator": "0xeeee86f718f9da3e7250624a460f6ea710e9c006",
+        "isUndelegate": true,
+        "wei": 118656112770535,
+        "transaction_hash": "0x6d32ab74ed6031e0664e989ced839f4dc4d862695df974ed8e1670c53db0130b"
+    },
+    {
+        "validator": "0xeeee86f718f9da3e7250624a460f6ea710e9c006",
+        "isUndelegate": false,
+        "wei": 2450741593885,
+        "transaction_hash": "0x6d32ab74ed6031e0664e989ced839f4dc4d862695df974ed8e1670c53db0130b"
+    },
+    {
+        "validator": "0xeeee86f718f9da3e7250624a460f6ea710e9c006",
+        "isUndelegate": false,
+        "wei": 276326079079095,
+        "transaction_hash": "0x6d32ab74ed6031e0664e989ced839f4dc4d862695df974ed8e1670c53db0130b"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": false,
+        "wei": 28087500,
+        "transaction_hash": "0xb42b1fb1466e72847bc62abb84f27e51fd5e50a47e0a909cba12f17f76559a96"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": false,
+        "wei": 28087500,
+        "transaction_hash": "0xb42b1fb1466e72847bc62abb84f27e51fd5e50a47e0a909cba12f17f76559a96"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": false,
+        "wei": 9362500,
+        "transaction_hash": "0xb42b1fb1466e72847bc62abb84f27e51fd5e50a47e0a909cba12f17f76559a96"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": false,
+        "wei": 28087500,
+        "transaction_hash": "0xb42b1fb1466e72847bc62abb84f27e51fd5e50a47e0a909cba12f17f76559a96"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": false,
+        "wei": 28087500,
+        "transaction_hash": "0xb42b1fb1466e72847bc62abb84f27e51fd5e50a47e0a909cba12f17f76559a96"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": false,
+        "wei": 28087500,
+        "transaction_hash": "0xb42b1fb1466e72847bc62abb84f27e51fd5e50a47e0a909cba12f17f76559a96"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": false,
+        "wei": 27225000,
+        "transaction_hash": "0xfdc0d641c967de75ffad0990e1b5eacffbfc2f9b1fd83358015abd649a32b1d5"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": false,
+        "wei": 27225000,
+        "transaction_hash": "0xfdc0d641c967de75ffad0990e1b5eacffbfc2f9b1fd83358015abd649a32b1d5"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": false,
+        "wei": 9075000,
+        "transaction_hash": "0xfdc0d641c967de75ffad0990e1b5eacffbfc2f9b1fd83358015abd649a32b1d5"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": false,
+        "wei": 27225000,
+        "transaction_hash": "0xfdc0d641c967de75ffad0990e1b5eacffbfc2f9b1fd83358015abd649a32b1d5"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": false,
+        "wei": 27225000,
+        "transaction_hash": "0xfdc0d641c967de75ffad0990e1b5eacffbfc2f9b1fd83358015abd649a32b1d5"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": false,
+        "wei": 27225000,
+        "transaction_hash": "0xfdc0d641c967de75ffad0990e1b5eacffbfc2f9b1fd83358015abd649a32b1d5"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": false,
+        "wei": 22706250,
+        "transaction_hash": "0x09c57c67ae3a9beeda26ac30890eabc070f64aaf8fe782d41f1818493cc9a9d9"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": false,
+        "wei": 22706250,
+        "transaction_hash": "0x09c57c67ae3a9beeda26ac30890eabc070f64aaf8fe782d41f1818493cc9a9d9"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": false,
+        "wei": 7568750,
+        "transaction_hash": "0x09c57c67ae3a9beeda26ac30890eabc070f64aaf8fe782d41f1818493cc9a9d9"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": false,
+        "wei": 22706250,
+        "transaction_hash": "0x09c57c67ae3a9beeda26ac30890eabc070f64aaf8fe782d41f1818493cc9a9d9"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": false,
+        "wei": 22706250,
+        "transaction_hash": "0x09c57c67ae3a9beeda26ac30890eabc070f64aaf8fe782d41f1818493cc9a9d9"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": false,
+        "wei": 22706250,
+        "transaction_hash": "0x09c57c67ae3a9beeda26ac30890eabc070f64aaf8fe782d41f1818493cc9a9d9"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": false,
+        "wei": 24600000,
+        "transaction_hash": "0x744fcc33191cccff63d7dca58341ca5fd38a67f585259a66877bef4ede68b689"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": false,
+        "wei": 24600000,
+        "transaction_hash": "0x744fcc33191cccff63d7dca58341ca5fd38a67f585259a66877bef4ede68b689"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": false,
+        "wei": 8200000,
+        "transaction_hash": "0x744fcc33191cccff63d7dca58341ca5fd38a67f585259a66877bef4ede68b689"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": false,
+        "wei": 24600000,
+        "transaction_hash": "0x744fcc33191cccff63d7dca58341ca5fd38a67f585259a66877bef4ede68b689"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": false,
+        "wei": 24600000,
+        "transaction_hash": "0x744fcc33191cccff63d7dca58341ca5fd38a67f585259a66877bef4ede68b689"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": false,
+        "wei": 24600000,
+        "transaction_hash": "0x744fcc33191cccff63d7dca58341ca5fd38a67f585259a66877bef4ede68b689"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": false,
+        "wei": 24468750,
+        "transaction_hash": "0x5ee820ded27b52eff37705f0bc2649ae450dac8fbbfa05bf3eb81944372e2a7f"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": false,
+        "wei": 24468750,
+        "transaction_hash": "0x5ee820ded27b52eff37705f0bc2649ae450dac8fbbfa05bf3eb81944372e2a7f"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": false,
+        "wei": 8156250,
+        "transaction_hash": "0x5ee820ded27b52eff37705f0bc2649ae450dac8fbbfa05bf3eb81944372e2a7f"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": false,
+        "wei": 24468750,
+        "transaction_hash": "0x5ee820ded27b52eff37705f0bc2649ae450dac8fbbfa05bf3eb81944372e2a7f"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": false,
+        "wei": 24468750,
+        "transaction_hash": "0x5ee820ded27b52eff37705f0bc2649ae450dac8fbbfa05bf3eb81944372e2a7f"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": false,
+        "wei": 24468750,
+        "transaction_hash": "0x5ee820ded27b52eff37705f0bc2649ae450dac8fbbfa05bf3eb81944372e2a7f"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": false,
+        "wei": 28406250,
+        "transaction_hash": "0xb4b343f942c483b3054d5f341d754ecaf942c2581277bee57cde9d563bfdd60a"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": false,
+        "wei": 28406250,
+        "transaction_hash": "0xb4b343f942c483b3054d5f341d754ecaf942c2581277bee57cde9d563bfdd60a"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": false,
+        "wei": 9468750,
+        "transaction_hash": "0xb4b343f942c483b3054d5f341d754ecaf942c2581277bee57cde9d563bfdd60a"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": false,
+        "wei": 28406250,
+        "transaction_hash": "0xb4b343f942c483b3054d5f341d754ecaf942c2581277bee57cde9d563bfdd60a"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": false,
+        "wei": 28406250,
+        "transaction_hash": "0xb4b343f942c483b3054d5f341d754ecaf942c2581277bee57cde9d563bfdd60a"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": false,
+        "wei": 28406250,
+        "transaction_hash": "0xb4b343f942c483b3054d5f341d754ecaf942c2581277bee57cde9d563bfdd60a"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": false,
+        "wei": 33506250,
+        "transaction_hash": "0x12e072d75509d25bb8545a5e605a1a2df56f70fa48c02b3724f5fdaa1f3e1efe"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": false,
+        "wei": 33506250,
+        "transaction_hash": "0x12e072d75509d25bb8545a5e605a1a2df56f70fa48c02b3724f5fdaa1f3e1efe"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": false,
+        "wei": 11168750,
+        "transaction_hash": "0x12e072d75509d25bb8545a5e605a1a2df56f70fa48c02b3724f5fdaa1f3e1efe"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": false,
+        "wei": 33506250,
+        "transaction_hash": "0x12e072d75509d25bb8545a5e605a1a2df56f70fa48c02b3724f5fdaa1f3e1efe"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": false,
+        "wei": 33506250,
+        "transaction_hash": "0x12e072d75509d25bb8545a5e605a1a2df56f70fa48c02b3724f5fdaa1f3e1efe"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": false,
+        "wei": 33506250,
+        "transaction_hash": "0x12e072d75509d25bb8545a5e605a1a2df56f70fa48c02b3724f5fdaa1f3e1efe"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": false,
+        "wei": 19350000,
+        "transaction_hash": "0xd6def95061715d72ed2995589f266009f3f8131ed4fd4f9068348e1b744822ca"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": false,
+        "wei": 19350000,
+        "transaction_hash": "0xd6def95061715d72ed2995589f266009f3f8131ed4fd4f9068348e1b744822ca"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": false,
+        "wei": 6450000,
+        "transaction_hash": "0xd6def95061715d72ed2995589f266009f3f8131ed4fd4f9068348e1b744822ca"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": false,
+        "wei": 19350000,
+        "transaction_hash": "0xd6def95061715d72ed2995589f266009f3f8131ed4fd4f9068348e1b744822ca"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": false,
+        "wei": 19350000,
+        "transaction_hash": "0xd6def95061715d72ed2995589f266009f3f8131ed4fd4f9068348e1b744822ca"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": false,
+        "wei": 19350000,
+        "transaction_hash": "0xd6def95061715d72ed2995589f266009f3f8131ed4fd4f9068348e1b744822ca"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": false,
+        "wei": 21056250,
+        "transaction_hash": "0x104d8eb60a90e3cd4f7eee9b09f1df744feb27fd7f1ec785a97bec1c98fdc59a"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": false,
+        "wei": 21056250,
+        "transaction_hash": "0x104d8eb60a90e3cd4f7eee9b09f1df744feb27fd7f1ec785a97bec1c98fdc59a"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": false,
+        "wei": 7018750,
+        "transaction_hash": "0x104d8eb60a90e3cd4f7eee9b09f1df744feb27fd7f1ec785a97bec1c98fdc59a"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": false,
+        "wei": 21056250,
+        "transaction_hash": "0x104d8eb60a90e3cd4f7eee9b09f1df744feb27fd7f1ec785a97bec1c98fdc59a"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": false,
+        "wei": 21056250,
+        "transaction_hash": "0x104d8eb60a90e3cd4f7eee9b09f1df744feb27fd7f1ec785a97bec1c98fdc59a"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": false,
+        "wei": 21056250,
+        "transaction_hash": "0x104d8eb60a90e3cd4f7eee9b09f1df744feb27fd7f1ec785a97bec1c98fdc59a"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": false,
+        "wei": 30937500,
+        "transaction_hash": "0xadf6b1c4e2ca129aacbbd454bfd0031e7d55a0e1bf5d395759c70c7b01286868"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": false,
+        "wei": 30937500,
+        "transaction_hash": "0xadf6b1c4e2ca129aacbbd454bfd0031e7d55a0e1bf5d395759c70c7b01286868"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": false,
+        "wei": 10312500,
+        "transaction_hash": "0xadf6b1c4e2ca129aacbbd454bfd0031e7d55a0e1bf5d395759c70c7b01286868"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": false,
+        "wei": 30937500,
+        "transaction_hash": "0xadf6b1c4e2ca129aacbbd454bfd0031e7d55a0e1bf5d395759c70c7b01286868"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": false,
+        "wei": 30937500,
+        "transaction_hash": "0xadf6b1c4e2ca129aacbbd454bfd0031e7d55a0e1bf5d395759c70c7b01286868"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": false,
+        "wei": 30937500,
+        "transaction_hash": "0xadf6b1c4e2ca129aacbbd454bfd0031e7d55a0e1bf5d395759c70c7b01286868"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": false,
+        "wei": 22218750,
+        "transaction_hash": "0xe9bba6099a7304b0f8f6a108e26b584d2bb3de560355016eceff30955be7f7e8"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": false,
+        "wei": 22218750,
+        "transaction_hash": "0xe9bba6099a7304b0f8f6a108e26b584d2bb3de560355016eceff30955be7f7e8"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": false,
+        "wei": 7406250,
+        "transaction_hash": "0xe9bba6099a7304b0f8f6a108e26b584d2bb3de560355016eceff30955be7f7e8"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": false,
+        "wei": 22218750,
+        "transaction_hash": "0xe9bba6099a7304b0f8f6a108e26b584d2bb3de560355016eceff30955be7f7e8"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": false,
+        "wei": 22218750,
+        "transaction_hash": "0xe9bba6099a7304b0f8f6a108e26b584d2bb3de560355016eceff30955be7f7e8"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": false,
+        "wei": 22218750,
+        "transaction_hash": "0xe9bba6099a7304b0f8f6a108e26b584d2bb3de560355016eceff30955be7f7e8"
+    },
+    {
+        "validator": "0x5ac99df645f3414876c816caa18b2d234024b487",
+        "isUndelegate": true,
+        "wei": 7972534394098,
+        "transaction_hash": "0x387fd1e8971b318e4c2f0f0d592bf4936b754f12e009522346b132f087f5191d"
+    },
+    {
+        "validator": "0x000000000056f99d36b6f2e0c51fd41496bbacb8",
+        "isUndelegate": true,
+        "wei": 558823529412,
+        "transaction_hash": "0x733d61ca185eeb7e3eaa6f8c927c2cceb14e41cd5707304e96c220151d89ec93"
+    },
+    {
+        "validator": "0x15458aed3c7a49b215fbfa863c6ff550c31e1a31",
+        "isUndelegate": true,
+        "wei": 558823529412,
+        "transaction_hash": "0x414b7360eab4a16639599e844c3ad1efdc9f22e282a27180974d82017ea3782b"
+    },
+    {
+        "validator": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
+        "isUndelegate": true,
+        "wei": 558823529412,
+        "transaction_hash": "0x776835111b569acda8d652fe7a2fb5cb161748ded46af81d8e0d507eba49f48c"
+    },
+    {
+        "validator": "0x48f1da3e3ec2814fbb3dcf57125001089b067402",
+        "isUndelegate": true,
+        "wei": 558823529412,
+        "transaction_hash": "0x7b36c9c5f15a2e05760d1b1ae8b6b59ca05cf2b4a727b3b3c0252ab41e2b15ae"
+    },
+    {
+        "validator": "0x497beec89958848126c2ea65934ce430e1410ad2",
+        "isUndelegate": true,
+        "wei": 558823529412,
+        "transaction_hash": "0x5ef2f24ea78d9eed9743bd00854dcd0d40161d797922f93301e300d016fb3985"
+    },
+    {
+        "validator": "0x4e256d24da830290d10f425b44f3e9439394385a",
+        "isUndelegate": true,
+        "wei": 558823529412,
+        "transaction_hash": "0x651e96df131b9ddd4752584706f4beca84fc33cf94e4c7ebacbfd5c7b985dd2f"
+    },
+    {
+        "validator": "0x65baa675fa9e5f6c7ae4541ebdb16c526de06f1f",
+        "isUndelegate": true,
+        "wei": 558823529412,
+        "transaction_hash": "0xa77227d612600b24001fca928084ce9ba76c2951122d3c332659e4c5438657b6"
+    },
+    {
+        "validator": "0x8a5dbdf69b282bf2e8fb9f29fd34891f79c5dfd4",
+        "isUndelegate": true,
+        "wei": 558823529412,
+        "transaction_hash": "0xcf842e84af7d6076e7b2b4924c53bf6b08e29a7dcf084eebd028bd6985b9adf1"
+    },
+    {
+        "validator": "0x8b8c3966870321866e7b7091c382308a6a97e9b1",
+        "isUndelegate": true,
+        "wei": 558823529412,
+        "transaction_hash": "0x387630e4a778439a817538403aebb5959c53b688ac2908c9660e3a12a600ef48"
+    },
+    {
+        "validator": "0x8f02ade62c1c1cf34daa855ccf1245aaf90d3056",
+        "isUndelegate": true,
+        "wei": 558823529412,
+        "transaction_hash": "0x3ccdad734e01aaa0c834069765f60e7fbeb24269ca08c5343d74b60b982e4ee3"
+    },
+    {
+        "validator": "0xa23b4556090260828ff3f939d2dbdd4f318b5f1f",
+        "isUndelegate": true,
+        "wei": 558823529412,
+        "transaction_hash": "0xb7c36402f1733323729c49f5e319e9a722920e0bf9364da3919cb0cd339f8511"
+    },
+    {
+        "validator": "0xabcdeff4b3727b83a23697500eef089020df2cd2",
+        "isUndelegate": true,
+        "wei": 558823529412,
+        "transaction_hash": "0xa6c0d6a4647a64f075997d6e4b9d7e3b83637ea0d3c1d17baf642865f704aef1"
+    },
+    {
+        "validator": "0xb00c116f72eb55f52ca80196b63014a42cc72de1",
+        "isUndelegate": true,
+        "wei": 558823529412,
+        "transaction_hash": "0xdf619cd9bab56902957eb4556b7915a8821c3658392afa6a255eede8e04a7cc5"
+    },
+    {
+        "validator": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
+        "isUndelegate": true,
+        "wei": 558823529411,
+        "transaction_hash": "0xba879441dfd95e155d46a21471b4686f6c7bf5021f39d94f9423923637702f89"
+    },
+    {
+        "validator": "0xe45c96a6a32318e5df7347477963bf0de38ff7ff",
+        "isUndelegate": true,
+        "wei": 558823529411,
+        "transaction_hash": "0x63f00828780172ab2b2a17750d4cc8d0ee576d7b46f98454816282cca50289e3"
+    },
+    {
+        "validator": "0xeeee86f718f9da3e7250624a460f6ea710e9c006",
+        "isUndelegate": true,
+        "wei": 558823529411,
+        "transaction_hash": "0x73a4a03d4b2ad214e63910f652036adbb8786b78deb2523ea213268735dd9649"
+    },
+    {
+        "validator": "0xf8efb4cb844a8458114994203d7b0bfe2422a288",
+        "isUndelegate": true,
+        "wei": 558823529411,
+        "transaction_hash": "0x634c0b6874267a1e76965f0421622d77dad0f928d4fde4b8a2a0701c153a3ece"
+    }
+]

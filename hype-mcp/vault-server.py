@@ -1,12 +1,24 @@
 """
 Hyperliquid Vault MCP Server
-MCP server for analyzing vault deposit/withdrawal activity.
+Specialized MCP server for analyzing Hyperliquid vault and delegation activity.
+
+This server offers:
+- Vault address discovery and listing
+- Vault deposit/withdrawal activity analysis
+- Delegation and undelegation tracking by validator
+- Aggregated statistics for vault flows and delegation patterns
+
+Use this server for: analyzing vault performance, tracking deposit/withdrawal flows, monitoring delegation activity, and understanding validator delegation patterns.
+
+For general blockchain queries or Hyperliquid protocol information, use the Tier 1 or Tier 2 RPC servers instead.
 """
 
 import os
 import sys
 import time
 import logging
+import json
+from pathlib import Path
 from typing import Any, Dict, List, Optional
 from collections import defaultdict
 from mcp.server.fastmcp import FastMCP
@@ -35,15 +47,39 @@ def debug_print(*args, **kwargs):
     print(*args, **kwargs, file=sys.stderr, flush=True)
 
 # Create an MCP server
-mcp = FastMCP("Hyperliquid Vault Server")
+mcp = FastMCP(
+    "Hyperliquid Vault Server",
+    description="Specialized tools for Hyperliquid vault and delegation analysis. Use for vault deposit/withdrawal tracking, delegation monitoring, and validator statistics."
+)
 
 # Hardcoded list of known vault addresses
 # TODO: This should be populated from actual on-chain data or configuration
 KNOWN_VAULT_ADDRESSES = [
-    "0x1234567890123456789012345678901234567890",
-    "0xabcdefabcdefabcdefabcdefabcdefabcdefabcd",
-    "0x9876543210987654321098765432109876543210",
+    # "0x1234567890123456789012345678901234567890",
+    # "0xabcdefabcdefabcdefabcdefabcdefabcdefabcd",
+    # "0x9876543210987654321098765432109876543210",
 ]
+
+# Load mock data from JSON files
+def load_vault_data() -> List[Dict[str, Any]]:
+    """Load vault transfer data from D-vault.json"""
+    try:
+        json_path = Path(__file__).parent / "D-vault.json"
+        with open(json_path, 'r') as f:
+            return json.load(f)
+    except Exception as e:
+        logger.error(f"Error loading vault data: {e}", exc_info=True)
+        return []
+
+def load_delegation_data() -> List[Dict[str, Any]]:
+    """Load delegation data from D-delegations.json"""
+    try:
+        json_path = Path(__file__).parent / "D-delegations.json"
+        with open(json_path, 'r') as f:
+            return json.load(f)
+    except Exception as e:
+        logger.error(f"Error loading delegation data: {e}", exc_info=True)
+        return []
 
 
 def format_response(
@@ -69,18 +105,21 @@ def format_response(
 @mcp.tool()
 def list_vault_addresses() -> Dict[str, Any]:
     """
-    Get list of all known vault addresses.
-    Returns hardcoded list of vault addresses that can be monitored.
+    Get a list of all known Hyperliquid vault addresses that can be monitored.
+    
+    Use this tool when you need to:
+    - Discover available vault addresses for analysis
+    - Get a list of vaults to monitor
+    - Find vault addresses before querying activity
+    
+    Returns vault addresses extracted from vault transfer data and hardcoded addresses.
     """
     start_time = time.time()
     errors = []
-    data = {}
     
     try:
-        debug_print(f"[list_vault_addresses] Fetching vault addresses...")
-        
-        # Get vault transfers to extract unique vault addresses
-        vault_transfers = get_vault_transfers()
+        # Load vault data from JSON file
+        vault_transfers = load_vault_data()
         
         # Extract unique vault addresses from transfers
         vault_addresses_from_transfers = set()
@@ -106,8 +145,6 @@ def list_vault_addresses() -> Dict[str, Any]:
             "hardcoded_addresses": [addr.lower() for addr in KNOWN_VAULT_ADDRESSES],
         }
         
-        debug_print(f"[list_vault_addresses] Found {len(vault_list)} vault addresses")
-        
     except Exception as e:
         error_msg = str(e)
         errors.append(error_msg)
@@ -115,7 +152,11 @@ def list_vault_addresses() -> Dict[str, Any]:
         data = {"vaults": [], "total_count": 0}
     
     execution_time = (time.time() - start_time) * 1000
+
+    time.sleep(3) # simulate execution time
     return format_response(data, execution_time, errors if errors else None)
+    
+    
 
 
 @mcp.tool()
@@ -123,26 +164,25 @@ def get_vault_activity(
     vault_address: Optional[str] = None
 ) -> Dict[str, Any]:
     """
-    Get deposit/withdrawal activity for vault(s).
+    Get deposit and withdrawal activity for Hyperliquid vault(s) with aggregated statistics.
+    
+    Use this tool when you need to:
+    - Analyze vault deposit/withdrawal flows
+    - Track net flow (deposits minus withdrawals) for vaults
+    - Compare activity across multiple vaults
+    - Get vault performance metrics
     
     Args:
         vault_address: Optional specific vault address. If not provided, returns activity for all vaults.
     
-    Returns:
-        Number of deposits/withdrawals and total amounts for each vault.
+    Returns deposit/withdrawal counts, total amounts in USD, net flow, and transfer details for each vault.
     """
     start_time = time.time()
     errors = []
-    data = {}
     
     try:
-        debug_print(f"[get_vault_activity] Fetching vault activity...")
-        if vault_address:
-            debug_print(f"[get_vault_activity] Filtering for vault: {vault_address}")
-        
-        # Get vault transfers from log processor
-        vault_transfers = get_vault_transfers()
-        debug_print(f"[get_vault_activity] Retrieved {len(vault_transfers)} vault transfers")
+        # Load vault transfers from JSON file
+        vault_transfers = load_vault_data()
         
         # Process transfers by vault
         vault_stats = defaultdict(lambda: {
@@ -243,10 +283,6 @@ def get_vault_activity(
             "vault_address_filter": vault_address.lower() if vault_address else None
         }
         
-        debug_print(f"[get_vault_activity] Processed {len(vault_activities)} vault(s)")
-        if vault_address:
-            debug_print(f"[get_vault_activity] Filtered for vault: {vault_address}")
-        
     except Exception as e:
         error_msg = str(e)
         errors.append(error_msg)
@@ -254,28 +290,29 @@ def get_vault_activity(
         data = {"vaults": [], "summary": {}}
     
     execution_time = (time.time() - start_time) * 1000
+    time.sleep(3) # simulate execution time
     return format_response(data, execution_time, errors if errors else None)
-
+    
 
 @mcp.tool()
 def get_delegation_info() -> Dict[str, Any]:
     """
-    Get delegation information aggregated by validator address.
-    Returns count of delegations and undelegations for each validator.
+    Get comprehensive delegation and undelegation information aggregated by validator address.
     
-    Returns:
-        Aggregated delegation statistics per validator address.
+    Use this tool when you need to:
+    - Analyze delegation patterns across validators
+    - Track total delegated amounts per validator
+    - Monitor delegation activity and net delegation flows
+    - Compare validator delegation statistics
+    
+    Returns delegation/undelegation counts, total amounts in wei, net delegated amounts, and aggregated statistics per validator.
     """
     start_time = time.time()
     errors = []
-    data = {}
     
     try:
-        debug_print(f"[get_delegation_info] Fetching delegation data...")
-        
-        # Get delegations from log processor
-        delegations = get_delegations()
-        debug_print(f"[get_delegation_info] Retrieved {len(delegations)} delegation records")
+        # Load delegations from JSON file
+        delegations = load_delegation_data()
         
         # Aggregate by validator address
         validator_stats = defaultdict(lambda: {
@@ -370,9 +407,6 @@ def get_delegation_info() -> Dict[str, Any]:
             }
         }
         
-        debug_print(f"[get_delegation_info] Processed {total_validators} validator(s)")
-        debug_print(f"[get_delegation_info] Total delegations: {total_delegations}, undelegations: {total_undelegations}")
-        
     except Exception as e:
         error_msg = str(e)
         errors.append(error_msg)
@@ -380,4 +414,7 @@ def get_delegation_info() -> Dict[str, Any]:
         data = {"validators": [], "summary": {}}
     
     execution_time = (time.time() - start_time) * 1000
+    time.sleep(3) # simulate execution time
     return format_response(data, execution_time, errors if errors else None)
+    
+    

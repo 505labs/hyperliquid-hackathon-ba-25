@@ -1,6 +1,13 @@
 """
-Hyperliquid Lava RPC MCP Server
-Implements Tier 1 tools for Hyperliquid chain analysis using Lava RPC endpoints.
+Hyperliquid Lava RPC MCP Server - Tier 1
+Provides fundamental blockchain RPC tools and Hyperliquid-specific information endpoints.
+
+This server offers:
+- Basic Ethereum-compatible RPC calls (blocks, transactions, accounts, gas, logs)
+- Direct Hyperliquid protocol information (orders, fills, portfolio, staking, etc.)
+- Use this server for: single-operation queries, getting raw blockchain data, accessing Hyperliquid user/asset information
+
+For compound operations that combine multiple RPC calls, use the Tier 2 server instead.
 """
 
 import os
@@ -22,7 +29,10 @@ from mcp.server.fastmcp import FastMCP
 from hyperliquid_log_processor import CoreWriterLogProcessor
 from hyperliquid import info
 # Create an MCP server
-mcp = FastMCP("Hyperliquid Lava RPC")
+mcp = FastMCP(
+    "Hyperliquid Lava RPC - Tier 1",
+    description="Fundamental blockchain RPC tools and Hyperliquid protocol information. Use for single-operation queries, raw blockchain data, and Hyperliquid user/asset information."
+)
 
 # Configuration
 LAVA_RPC_URL = os.getenv("LAVA_RPC_URL", "https://eth1.lava.build/lava-referer-8b51600b-b188-4c52-8c57-c65d3a9be5af/")
@@ -109,8 +119,14 @@ def format_response(
 @mcp.tool()
 async def get_chain_info() -> Dict[str, Any]:
     """
-    Aggregate chain information: eth_chainId, net_version, web3_clientVersion, eth_syncing.
-    Returns comprehensive chain metadata.
+    Get comprehensive chain metadata including chain ID, network version, client version, and sync status.
+    
+    Use this tool when you need to:
+    - Verify which network you're connected to (mainnet/testnet)
+    - Check if the node is fully synced
+    - Get basic network information for validation
+    
+    Returns: chainId, netVersion, clientVersion, syncing status
     """
     start_time = time.time()
     rpc = await get_rpc_client()
@@ -158,7 +174,14 @@ async def get_chain_info() -> Dict[str, Any]:
 @mcp.tool()
 async def check_node_sync_status() -> Dict[str, Any]:
     """
-    Check node sync status. Returns boolean sync status and progress from eth_syncing.
+    Check if the RPC node is fully synced with the blockchain.
+    
+    Use this tool when you need to:
+    - Verify data freshness before making queries
+    - Check if the node is catching up after downtime
+    - Validate that you're getting the latest blockchain state
+    
+    Returns: isSynced boolean, isSyncing boolean, and progress details if syncing
     """
     start_time = time.time()
     rpc = await get_rpc_client()
@@ -193,11 +216,18 @@ async def check_node_sync_status() -> Dict[str, Any]:
 @mcp.tool()
 async def get_block(block_id: str, full_transactions: bool = False) -> Dict[str, Any]:
     """
-    Get block by number or hash.
+    Get a single block by number, hash, or special identifier.
+    
+    Use this tool when you need to:
+    - Inspect a specific block's contents
+    - Get block metadata (timestamp, gas used, transaction count)
+    - Retrieve transactions from a known block
     
     Args:
-        block_id: Block number (hex string or decimal) or block hash, or "latest", "earliest", "pending"
-        full_transactions: If True, include full transaction objects; if False, include only transaction hashes
+        block_id: Block number (hex/decimal), block hash, or "latest"/"earliest"/"pending"
+        full_transactions: If True, returns full transaction objects; if False, only transaction hashes
+    
+    For multiple blocks, use Tier 2 server's get_block_range tool instead.
     """
     start_time = time.time()
     rpc = await get_rpc_client()
@@ -237,10 +267,15 @@ async def get_block(block_id: str, full_transactions: bool = False) -> Dict[str,
 @mcp.tool()
 async def get_latest_block(full_transactions: bool = False) -> Dict[str, Any]:
     """
-    Get the latest block.
+    Get the most recently mined block on the chain.
+    
+    Use this tool when you need to:
+    - Get the current block number
+    - Check the latest block timestamp
+    - See recent transactions
     
     Args:
-        full_transactions: If True, include full transaction objects; if False, include only transaction hashes
+        full_transactions: If True, includes full transaction objects; if False, only transaction hashes
     """
     return await get_block("latest", full_transactions)
 
@@ -299,10 +334,17 @@ async def get_block_transactions(block_id: str) -> Dict[str, Any]:
 @mcp.tool()
 async def get_transaction(tx_hash: str) -> Dict[str, Any]:
     """
-    Get transaction by hash.
+    Get a transaction's details by its hash.
+    
+    Use this tool when you need to:
+    - Inspect a specific transaction's parameters (from, to, value, data)
+    - Check transaction status before it's mined
+    - Get transaction details for analysis
     
     Args:
         tx_hash: Transaction hash (0x-prefixed hex string)
+    
+    For transaction receipt (after mining) or cost analysis, use get_transaction_receipt or Tier 2 tools.
     """
     start_time = time.time()
     rpc = await get_rpc_client()
@@ -327,10 +369,18 @@ async def get_transaction(tx_hash: str) -> Dict[str, Any]:
 @mcp.tool()
 async def get_transaction_receipt(tx_hash: str) -> Dict[str, Any]:
     """
-    Get transaction receipt by hash.
+    Get a transaction receipt after it has been mined.
+    
+    Use this tool when you need to:
+    - Verify a transaction was successfully executed
+    - Get gas used and block number where transaction was mined
+    - Check transaction status (success/failure)
+    - Get event logs emitted by the transaction
     
     Args:
         tx_hash: Transaction hash (0x-prefixed hex string)
+    
+    Note: Returns null if transaction hasn't been mined yet. For waiting/monitoring, use Tier 2 server tools.
     """
     start_time = time.time()
     rpc = await get_rpc_client()
@@ -401,11 +451,18 @@ async def estimate_transaction_gas(transaction_object: Dict[str, Any]) -> Dict[s
 @mcp.tool()
 async def get_account_balance(address: str, block: str = "latest") -> Dict[str, Any]:
     """
-    Get account balance.
+    Get the native token balance of an account at a specific block.
+    
+    Use this tool when you need to:
+    - Check current or historical account balance
+    - Verify balance before/after a transaction
+    - Get balance at a specific point in time
     
     Args:
         address: Account address (0x-prefixed hex string)
-        block: Block number or "latest", "earliest", "pending" (default: "latest")
+        block: Block number or "latest"/"earliest"/"pending" (default: "latest")
+    
+    Returns balance in wei (hex and decimal formats).
     """
     start_time = time.time()
     rpc = await get_rpc_client()
@@ -676,7 +733,16 @@ async def query_logs(filter_object: Dict[str, Any]) -> Dict[str, Any]:
 @mcp.tool()
 async def get_gas_price() -> Dict[str, Any]:
     """
-    Get current gas price.
+    Get the current network gas price.
+    
+    Use this tool when you need to:
+    - Estimate transaction costs
+    - Set gas price for new transactions
+    - Check current network congestion
+    
+    Returns gas price in wei (cached for 60 seconds to reduce RPC calls).
+    
+    For gas trend analysis over time, use Tier 2 server's analyze_gas_trends tool.
     """
     start_time = time.time()
     rpc = await get_rpc_client()
@@ -779,7 +845,16 @@ hl_info = info.Info()
 @mcp.tool()
 async def get_open_orders(address: str, dex: str = "") -> Dict[str, Any]:
     """
-    Get a user's open orders.
+    Get all currently open trading orders for a Hyperliquid user.
+    
+    Use this tool when you need to:
+    - Check a user's active orders
+    - Monitor order status
+    - Get order details (price, size, side, etc.)
+    
+    Args:
+        address: User wallet address
+        dex: Optional DEX identifier (empty string for default)
     """
     start_time = time.time()
     result = hl_info.open_orders(address, dex)
@@ -797,7 +872,17 @@ async def get_frontend_open_orders(address: str, dex: str = "") -> Dict[str, Any
 @mcp.tool()
 async def get_user_fills(address: str) -> Dict[str, Any]:
     """
-    Get a user's fills.
+    Get all trade fills (executed orders) for a Hyperliquid user.
+    
+    Use this tool when you need to:
+    - View trading history
+    - Analyze executed trades
+    - Calculate trading performance
+    
+    Args:
+        address: User wallet address
+    
+    For time-filtered fills, use get_user_fills_by_time instead.
     """
     start_time = time.time()
     result = hl_info.user_fills(address)
@@ -815,7 +900,15 @@ async def get_user_fills_by_time(address: str, start_time_ms: int, end_time_ms: 
 @mcp.tool()
 async def get_portfolio(address: str) -> Dict[str, Any]:
     """
-    Get a user's portfolio performance data.
+    Get comprehensive portfolio performance data for a Hyperliquid user.
+    
+    Use this tool when you need to:
+    - View user's trading positions and PnL
+    - Analyze portfolio performance
+    - Get account equity and margin information
+    
+    Args:
+        address: User wallet address
     """
     start_time = time.time()
     result = hl_info.portfolio(address)
@@ -824,7 +917,16 @@ async def get_portfolio(address: str) -> Dict[str, Any]:
 @mcp.tool()
 async def get_clearinghouse_state(address: str, dex: str = "") -> Dict[str, Any]:
     """
-    Get a user's clearinghouse state (margin/account).
+    Get a user's clearinghouse state including margin, positions, and account details.
+    
+    Use this tool when you need to:
+    - Check margin requirements and available margin
+    - View all open positions
+    - Get account health metrics
+    
+    Args:
+        address: User wallet address
+        dex: Optional DEX identifier (empty string for default)
     """
     start_time = time.time()
     result = hl_info.user_state(address, dex)
@@ -869,7 +971,17 @@ async def get_user_fees(address: str) -> Dict[str, Any]:
 @mcp.tool()
 async def get_user_staking_summary(address: str) -> Dict[str, Any]:
     """
-    Get staking summary for a user.
+    Get staking summary including total staked amount and rewards for a Hyperliquid user.
+    
+    Use this tool when you need to:
+    - Check user's total staked HYPE
+    - View staking rewards
+    - Get staking position overview
+    
+    Args:
+        address: User wallet address
+    
+    For detailed delegation information, use get_user_staking_delegations or the Vault Server.
     """
     start_time = time.time()
     result = hl_info.user_staking_summary(address)

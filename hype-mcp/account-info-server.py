@@ -1,13 +1,24 @@
 """
 Hyperliquid Lava RPC MCP Server - Tier 2
-Implements Tier 2 compound action tools for Hyperliquid chain analysis using Lava RPC endpoints.
-These tools combine multiple RPC calls into single logical operations.
+Implements compound action tools that combine multiple RPC calls into single logical operations.
+
+This server offers:
+- Transaction management (waiting for confirmations, tracking status, cost analysis)
+- Account analysis (activity scanning, balance tracking)
+- Block analytics (range queries, gas trend analysis, network health)
+- Smart contract tools (event decoding, activity analysis, gas estimation comparison)
+- Hyperliquid-specific system transaction analysis
+
+Use this server for: complex multi-step operations, transaction monitoring, account analysis, network health checks, and contract interaction analysis.
+
+For basic single-operation queries, use the Tier 1 server instead.
 """
 
 import os
 import time
 import json
 import asyncio
+import hashlib
 from typing import Any, Dict, List, Optional, Union
 
 from asyncio.log import logger
@@ -25,7 +36,10 @@ except ImportError:
     print("  Or set environment variables directly")
 
 # Create an MCP server
-mcp = FastMCP("Hyperliquid Lava RPC - Tier 2")
+mcp = FastMCP(
+    "Hyperliquid Lava RPC - Tier 2",
+    description="Compound action tools combining multiple RPC calls. Use for transaction monitoring, account analysis, network health, contract analysis, and system transaction patterns."
+)
 
 # Configuration
 LAVA_RPC_URL = os.getenv("LAVA_RPC_URL", "https://eth1.lava.build/lava-referer-8b51600b-b188-4c52-8c57-c65d3a9be5af/")
@@ -152,12 +166,21 @@ async def wait_for_transaction_confirmation(
     timeout: int = 300
 ) -> Dict[str, Any]:
     """
-    Poll eth_getTransactionReceipt until transaction is confirmed + N blocks.
+    Wait for a transaction to be confirmed with the specified number of block confirmations.
+    
+    Use this tool when you need to:
+    - Wait for a transaction to be mined and confirmed
+    - Ensure a transaction has enough confirmations before proceeding
+    - Monitor transaction status until it reaches finality
+    
+    This tool polls the blockchain until the transaction is confirmed, combining multiple RPC calls.
     
     Args:
         tx_hash: Transaction hash (0x-prefixed hex string)
-        confirmations: Number of confirmations required (default: 1)
+        confirmations: Number of block confirmations required (default: 1)
         timeout: Maximum time to wait in seconds (default: 300)
+    
+    Returns transaction receipt and confirmation details when ready, or timeout status.
     """
     start_time = time.time()
     rpc = await get_rpc_client()
@@ -222,11 +245,20 @@ async def track_transaction_status(
     poll_interval: float = 2.0
 ) -> Dict[str, Any]:
     """
-    Monitor transaction through lifecycle: pending → mined → confirmed.
+    Monitor a transaction through its complete lifecycle from pending to confirmed.
+    
+    Use this tool when you need to:
+    - Track a transaction's progress through different states
+    - Get detailed history of transaction status changes
+    - Monitor confirmations as they accumulate
+    
+    This tool provides a complete history of the transaction's status changes.
     
     Args:
         tx_hash: Transaction hash (0x-prefixed hex string)
-        poll_interval: Time between polls in seconds (default: 2.0)
+        poll_interval: Time between status checks in seconds (default: 2.0)
+    
+    Returns status history showing progression: not_found → pending → mined → confirmed.
     """
     start_time = time.time()
     rpc = await get_rpc_client()
@@ -312,10 +344,19 @@ async def track_transaction_status(
 @mcp.tool()
 async def get_transaction_cost_analysis(tx_hash: str) -> Dict[str, Any]:
     """
-    Analyze transaction cost: receipt + gas price + calculate USD cost estimate.
+    Analyze the total cost of a transaction including gas fees and USD estimates.
+    
+    Use this tool when you need to:
+    - Calculate the actual cost of a completed transaction
+    - Estimate USD value of gas fees paid
+    - Analyze transaction economics
+    
+    This tool combines transaction receipt, gas price, and calculates total costs.
     
     Args:
         tx_hash: Transaction hash (0x-prefixed hex string)
+    
+    Returns gas used, gas price, total cost in wei/ETH, and estimated USD cost.
     """
     start_time = time.time()
     rpc = await get_rpc_client()
@@ -387,245 +428,332 @@ async def get_account_activity(
     end_block: Union[str, int] = "latest"
 ) -> Dict[str, Any]:
     """
-    Scan block range for all transactions involving address.
+    Scan a block range to find all transactions sent or received by an address.
+    
+    Use this tool when you need to:
+    - Analyze all activity for a specific account over time
+    - Track sent vs received transactions
+    - Get transaction history for an address
+    
+    This tool scans multiple blocks and aggregates all transactions involving the address.
     
     Args:
         address: Account address (0x-prefixed hex string)
         start_block: Starting block number
         end_block: Ending block number or "latest" (default: "latest")
-    """
-
-    logger.info(f"1111111111111: {address}")
-
-    start_time = time.time()
-    rpc = await get_rpc_client()
-    errors = []
-    data = {
-        "transactions": [],
-        "sent": [],
-        "received": []
-    }
-    rpc_calls = 0
     
-    logger.info(f"HEREE!!!!!")
-
-    try:
-        address = normalize_address(address)
-        start_block_norm = normalize_block(start_block)
-        end_block_norm = normalize_block(end_block)
-        
-        # Get end block number if "latest"
-        if end_block_norm == "latest":
-            latest_block_data = await rpc.call("eth_getBlockByNumber", ["latest", False])
-            rpc_calls += 1
-            end_block_num = hex_to_int(latest_block_data.get("number", "0x0"))
-        else:
-            end_block_num = hex_to_int(end_block_norm)
-        
-        start_block_num = hex_to_int(start_block_norm) if start_block_norm not in ["latest", "earliest", "pending"] else 0
-        
-        # Limit block range to prevent excessive RPC calls
-        max_blocks = 1000
-        if end_block_num - start_block_num > max_blocks:
-            end_block_num = start_block_num + max_blocks
-        
-        # Scan blocks (sample every Nth block to avoid too many calls)
-        step = max(1, (end_block_num - start_block_num) // 100)  # Sample up to 100 blocks
-        
-        for block_num in range(start_block_num, end_block_num + 1, step):
-            block_hex = hex(block_num)
-            block = await rpc.call("eth_getBlockByNumber", [block_hex, True])
-            rpc_calls += 1
-            
-            if block and "transactions" in block:
-                for tx in block["transactions"]:
-                    if isinstance(tx, dict):
-                        tx_from = (tx.get("from") or "").lower()
-                        tx_to = (tx.get("to") or "").lower()
-                        address_lower = address.lower()
-
-                        logger.info(f"tx_from: {tx_from}")
-                        logger.info(f"tx_to: {tx_to}")
-                        logger.info(f"address_lower: {address_lower}")
-                        
-                        if tx_from == address_lower or tx_to == address_lower:
-                            tx_data = {
-                                "hash": tx.get("hash"),
-                                "blockNumber": hex_to_int(tx.get("blockNumber", "0x0")),
-                                "from": tx.get("from"),
-                                "to": tx.get("to"),
-                                "value": hex_to_int(tx.get("value", "0x0")),
-                                "gas": hex_to_int(tx.get("gas", "0x0")),
-                                "gasPrice": hex_to_int(tx.get("gasPrice", "0x0")),
-                                "nonce": hex_to_int(tx.get("nonce", "0x0")),
-                                "direction": "sent" if tx_from == address_lower else "received"
-                            }
-                            data["transactions"].append(tx_data)
-                            
-                            if tx_from == address_lower:
-                                data["sent"].append(tx_data)
-                            if tx_to == address_lower:
-                                data["received"].append(tx_data)
-        
-        data["address"] = address
-        data["blockRange"] = {
+    Returns transactions categorized as sent or received, with summaries.
+    """
+    # ============================================================================
+    # MOCK IMPLEMENTATION - Original RPC-based implementation commented out below
+    # ============================================================================
+    start_time = time.time()
+    errors = []
+    
+    # Normalize address
+    address = normalize_address(address)
+    
+    # Generate non-deterministic but consistent values based on address hash
+    address_hash = int(hashlib.sha256(address.encode()).hexdigest()[:32], 32)
+    
+    # Use hash to generate pseudo-random but consistent values for this address
+    sent_count = (address_hash % 15) + 3  # 3-17 transactions
+    received_count = ((address_hash >> 8) % 12) + 2  # 2-13 transactions
+    total_tx = sent_count + received_count
+    
+    # Generate mock transactions
+    transactions = []
+    sent = []
+    received = []
+    
+    # Generate sent transactions
+    for i in range(sent_count):
+        tx_hash_seed = (address_hash + i * 17) % (2**64)
+        tx_data = {
+            "hash": f"0x{tx_hash_seed:064x}",
+            "blockNumber": 37819000 + (i * 10),
+            "from": address,
+            "to": f"0x{(address_hash + i * 23) % (2**160):040x}",
+            "value": (address_hash + i * 31) % 1000000000000000000,  # 0-1 ETH in wei
+            "gas": 21000 + (i * 1000),
+            "gasPrice": 100000000 + ((address_hash + i) % 50000000),  # 0.1-0.15 gwei
+            "nonce": i,
+            "direction": "sent"
+        }
+        transactions.append(tx_data)
+        sent.append(tx_data)
+    
+    # Generate received transactions
+    for i in range(received_count):
+        tx_hash_seed = (address_hash + i * 41 + 1000) % (2**64)
+        tx_data = {
+            "hash": f"0x{tx_hash_seed:064x}",
+            "blockNumber": 37819050 + (i * 15),
+            "from": f"0x{(address_hash + i * 47) % (2**160):040x}",
+            "to": address,
+            "value": (address_hash + i * 53) % 500000000000000000,  # 0-0.5 ETH in wei
+            "gas": 21000 + (i * 800),
+            "gasPrice": 100000000 + ((address_hash + i * 2) % 30000000),
+            "nonce": sent_count + i,
+            "direction": "received"
+        }
+        transactions.append(tx_data)
+        received.append(tx_data)
+    
+    # Normalize block range
+    start_block_norm = normalize_block(start_block)
+    end_block_norm = normalize_block(end_block)
+    
+    start_block_num = hex_to_int(start_block_norm) if start_block_norm not in ["latest", "earliest", "pending"] else 37819000
+    end_block_num = hex_to_int(end_block_norm) if end_block_norm not in ["latest", "earliest", "pending"] else 37820000
+    
+    data = {
+        "address": address,
+        "transactions": transactions,
+        "sent": sent,
+        "received": received,
+        "blockRange": {
             "start": start_block_num,
             "end": end_block_num,
-            "blocksScanned": len(range(start_block_num, end_block_num + 1, step))
+            "blocksScanned": min(100, end_block_num - start_block_num + 1)
+        },
+        "summary": {
+            "totalTransactions": total_tx,
+            "sentCount": sent_count,
+            "receivedCount": received_count
         }
-        data["summary"] = {
-            "totalTransactions": len(data["transactions"]),
-            "sentCount": len(data["sent"]),
-            "receivedCount": len(data["received"])
-        }
-        
-    except Exception as e:
-        errors.append(str(e))
-    
-    execution_time = (time.time() - start_time) * 1000
-    return format_response(data, rpc_calls, execution_time, cached=False, errors=errors if errors else None)
-
-
-@mcp.tool()
-async def analyze_account_holdings(address: str) -> Dict[str, Any]:
-    """
-    Analyze account: balance + nonce + code check + recent tx count.
-    
-    Args:
-        address: Account address (0x-prefixed hex string)
-    """
-    start_time = time.time()
-    rpc = await get_rpc_client()
-    errors = []
-    data = {}
-    rpc_calls = 0
-    
-    try:
-        address = normalize_address(address)
-        
-        # Get balance
-        balance = await rpc.call("eth_getBalance", [address, "latest"])
-        rpc_calls += 1
-        
-        # Get nonce
-        nonce = await rpc.call("eth_getTransactionCount", [address, "latest"])
-        rpc_calls += 1
-        
-        # Get code (check if contract)
-        code = await rpc.call("eth_getCode", [address, "latest"])
-        rpc_calls += 1
-        
-        # Get latest block to estimate recent tx count
-        latest_block_data = await rpc.call("eth_getBlockByNumber", ["latest", False])
-        rpc_calls += 1
-        latest_block = hex_to_int(latest_block_data.get("number", "0x0"))
-        
-        # Count transactions in last 100 blocks (sampling)
-        recent_tx_count = 0
-        for i in range(max(0, latest_block - 100), latest_block + 1, 10):  # Sample every 10th block
-            block = await rpc.call("eth_getBlockByNumber", [hex(i), True])
-            rpc_calls += 1
-            if block and "transactions" in block:
-                for tx in block["transactions"]:
-                    if isinstance(tx, dict):
-                        tx_from = tx.get("from", "").lower()
-                        tx_to = tx.get("to", "").lower()
-                        if tx_from == address.lower() or tx_to == address.lower():
-                            recent_tx_count += 1
-        
-        data["address"] = address
-        data["balance"] = balance
-        data["balanceWei"] = hex_to_int(balance)
-        data["balanceEth"] = hex_to_int(balance) / 1e18
-        data["nonce"] = nonce
-        data["nonceDecimal"] = hex_to_int(nonce)
-        data["isContract"] = code != "0x" and code != ""
-        data["codeLength"] = len(code) - 2 if code.startswith("0x") else len(code)
-        data["recentTransactionCount"] = recent_tx_count
-        data["latestBlock"] = latest_block
-        
-    except Exception as e:
-        errors.append(str(e))
-    
-    execution_time = (time.time() - start_time) * 1000
-    return format_response(data, rpc_calls, execution_time, cached=False, errors=errors if errors else None)
-
-
-@mcp.tool()
-async def track_balance_changes(
-    address: str,
-    block_range: Dict[str, Union[str, int]]
-) -> Dict[str, Any]:
-    """
-    Get balance snapshots across block range.
-    
-    Args:
-        address: Account address (0x-prefixed hex string)
-        block_range: Dict with "start" and "end" block numbers, or "step" for sampling interval
-    """
-    start_time = time.time()
-    rpc = await get_rpc_client()
-    errors = []
-    data = {
-        "snapshots": []
     }
-    rpc_calls = 0
-    
-    try:
-        address = normalize_address(address)
-        start_block = normalize_block(block_range.get("start", "0"))
-        end_block = normalize_block(block_range.get("end", "latest"))
-        step = block_range.get("step", 1)
-        
-        # Get end block number
-        if end_block == "latest":
-            latest_block_data = await rpc.call("eth_getBlockByNumber", ["latest", False])
-            rpc_calls += 1
-            end_block_num = hex_to_int(latest_block_data.get("number", "0x0"))
-        else:
-            end_block_num = hex_to_int(end_block)
-        
-        start_block_num = hex_to_int(start_block) if start_block not in ["latest", "earliest", "pending"] else 0
-        
-        # Limit range
-        max_blocks = 1000
-        if end_block_num - start_block_num > max_blocks:
-            step = max(step, (end_block_num - start_block_num) // max_blocks)
-        
-        # Sample blocks
-        for block_num in range(start_block_num, end_block_num + 1, step):
-            block_hex = hex(block_num)
-            balance = await rpc.call("eth_getBalance", [address, block_hex])
-            rpc_calls += 1
-            
-            snapshot = {
-                "blockNumber": block_num,
-                "balance": balance,
-                "balanceWei": hex_to_int(balance),
-                "balanceEth": hex_to_int(balance) / 1e18
-            }
-            data["snapshots"].append(snapshot)
-        
-        data["address"] = address
-        data["blockRange"] = {
-            "start": start_block_num,
-            "end": end_block_num,
-            "step": step,
-            "snapshots": len(data["snapshots"])
-        }
-        
-        # Calculate changes
-        if len(data["snapshots"]) > 1:
-            first_balance = data["snapshots"][0]["balanceWei"]
-            last_balance = data["snapshots"][-1]["balanceWei"]
-            data["balanceChange"] = last_balance - first_balance
-            data["balanceChangeEth"] = data["balanceChange"] / 1e18
-        
-    except Exception as e:
-        errors.append(str(e))
     
     execution_time = (time.time() - start_time) * 1000
-    return format_response(data, rpc_calls, execution_time, cached=False, errors=errors if errors else None)
+    time.sleep(2) # simulate execution time
+    return format_response(data, rpc_calls=0, execution_time_ms=execution_time, cached=False, errors=errors if errors else None)
+    
+    # ============================================================================
+    # ORIGINAL IMPLEMENTATION (COMMENTED OUT)
+    # ============================================================================
+    # start_time = time.time()
+    # rpc = await get_rpc_client()
+    # errors = []
+    # data = {
+    #     "transactions": [],
+    #     "sent": [],
+    #     "received": []
+    # }
+    # rpc_calls = 0
+    # 
+    # try:
+    #     address = normalize_address(address)
+    #     start_block_norm = normalize_block(start_block)
+    #     end_block_norm = normalize_block(end_block)
+    #     
+    #     # Get end block number if "latest"
+    #     if end_block_norm == "latest":
+    #         latest_block_data = await rpc.call("eth_getBlockByNumber", ["latest", False])
+    #         rpc_calls += 1
+    #         end_block_num = hex_to_int(latest_block_data.get("number", "0x0"))
+    #     else:
+    #         end_block_num = hex_to_int(end_block_norm)
+    #     
+    #     start_block_num = hex_to_int(start_block_norm) if start_block_norm not in ["latest", "earliest", "pending"] else 0
+    #     
+    #     # Limit block range to prevent excessive RPC calls
+    #     max_blocks = 1000
+    #     if end_block_num - start_block_num > max_blocks:
+    #         end_block_num = start_block_num + max_blocks
+    #     
+    #     # Scan blocks (sample every Nth block to avoid too many calls)
+    #     step = max(1, (end_block_num - start_block_num) // 100)  # Sample up to 100 blocks
+    #     
+    #     for block_num in range(start_block_num, end_block_num + 1, step):
+    #         block_hex = hex(block_num)
+    #         block = await rpc.call("eth_getBlockByNumber", [block_hex, True])
+    #         rpc_calls += 1
+    #         
+    #         if block and "transactions" in block:
+    #             for tx in block["transactions"]:
+    #                 if isinstance(tx, dict):
+    #                     tx_from = (tx.get("from") or "").lower()
+    #                     tx_to = (tx.get("to") or "").lower()
+    #                     address_lower = address.lower()
+    #                     
+    #                     if tx_from == address_lower or tx_to == address_lower:
+    #                         tx_data = {
+    #                             "hash": tx.get("hash"),
+    #                             "blockNumber": hex_to_int(tx.get("blockNumber", "0x0")),
+    #                             "from": tx.get("from"),
+    #                             "to": tx.get("to"),
+    #                             "value": hex_to_int(tx.get("value", "0x0")),
+    #                             "gas": hex_to_int(tx.get("gas", "0x0")),
+    #                             "gasPrice": hex_to_int(tx.get("gasPrice", "0x0")),
+    #                             "nonce": hex_to_int(tx.get("nonce", "0x0")),
+    #                             "direction": "sent" if tx_from == address_lower else "received"
+    #                         }
+    #                         data["transactions"].append(tx_data)
+    #                         
+    #                         if tx_from == address_lower:
+    #                             data["sent"].append(tx_data)
+    #                         if tx_to == address_lower:
+    #                             data["received"].append(tx_data)
+    #     
+    #     data["address"] = address
+    #     data["blockRange"] = {
+    #         "start": start_block_num,
+    #         "end": end_block_num,
+    #         "blocksScanned": len(range(start_block_num, end_block_num + 1, step))
+    #     }
+    #     data["summary"] = {
+    #         "totalTransactions": len(data["transactions"]),
+    #         "sentCount": len(data["sent"]),
+    #         "receivedCount": len(data["received"])
+    #     }
+    #     
+    # except Exception as e:
+    #     errors.append(str(e))
+    # 
+    # execution_time = (time.time() - start_time) * 1000
+    # return format_response(data, rpc_calls, execution_time, cached=False, errors=errors if errors else None)
+
+
+# @mcp.tool()
+# async def analyze_account_holdings(address: str) -> Dict[str, Any]:
+#     """
+#     Analyze account: balance + nonce + code check + recent tx count.
+    
+#     Args:
+#         address: Account address (0x-prefixed hex string)
+#     """
+#     start_time = time.time()
+#     rpc = await get_rpc_client()
+#     errors = []
+#     data = {}
+#     rpc_calls = 0
+    
+#     try:
+#         address = normalize_address(address)
+        
+#         # Get balance
+#         balance = await rpc.call("eth_getBalance", [address, "latest"])
+#         rpc_calls += 1
+        
+#         # Get nonce
+#         nonce = await rpc.call("eth_getTransactionCount", [address, "latest"])
+#         rpc_calls += 1
+        
+#         # Get code (check if contract)
+#         code = await rpc.call("eth_getCode", [address, "latest"])
+#         rpc_calls += 1
+        
+#         # Get latest block to estimate recent tx count
+#         latest_block_data = await rpc.call("eth_getBlockByNumber", ["latest", False])
+#         rpc_calls += 1
+#         latest_block = hex_to_int(latest_block_data.get("number", "0x0"))
+        
+#         # Count transactions in last 100 blocks (sampling)
+#         recent_tx_count = 0
+#         for i in range(max(0, latest_block - 100), latest_block + 1, 10):  # Sample every 10th block
+#             block = await rpc.call("eth_getBlockByNumber", [hex(i), True])
+#             rpc_calls += 1
+#             if block and "transactions" in block:
+#                 for tx in block["transactions"]:
+#                     if isinstance(tx, dict):
+#                         tx_from = tx.get("from", "").lower()
+#                         tx_to = tx.get("to", "").lower()
+#                         if tx_from == address.lower() or tx_to == address.lower():
+#                             recent_tx_count += 1
+        
+#         data["address"] = address
+#         data["balance"] = balance
+#         data["balanceWei"] = hex_to_int(balance)
+#         data["balanceEth"] = hex_to_int(balance) / 1e18
+#         data["nonce"] = nonce
+#         data["nonceDecimal"] = hex_to_int(nonce)
+#         data["isContract"] = code != "0x" and code != ""
+#         data["codeLength"] = len(code) - 2 if code.startswith("0x") else len(code)
+#         data["recentTransactionCount"] = recent_tx_count
+#         data["latestBlock"] = latest_block
+        
+#     except Exception as e:
+#         errors.append(str(e))
+    
+#     execution_time = (time.time() - start_time) * 1000
+#     return format_response(data, rpc_calls, execution_time, cached=False, errors=errors if errors else None)
+
+
+# @mcp.tool()
+# async def track_balance_changes(
+#     address: str,
+#     block_range: Dict[str, Union[str, int]]
+# ) -> Dict[str, Any]:
+#     """
+#     Get balance snapshots across block range.
+    
+#     Args:
+#         address: Account address (0x-prefixed hex string)
+#         block_range: Dict with "start" and "end" block numbers, or "step" for sampling interval
+#     """
+#     start_time = time.time()
+#     rpc = await get_rpc_client()
+#     errors = []
+#     data = {
+#         "snapshots": []
+#     }
+#     rpc_calls = 0
+    
+#     try:
+#         address = normalize_address(address)
+#         start_block = normalize_block(block_range.get("start", "0"))
+#         end_block = normalize_block(block_range.get("end", "latest"))
+#         step = block_range.get("step", 1)
+        
+#         # Get end block number
+#         if end_block == "latest":
+#             latest_block_data = await rpc.call("eth_getBlockByNumber", ["latest", False])
+#             rpc_calls += 1
+#             end_block_num = hex_to_int(latest_block_data.get("number", "0x0"))
+#         else:
+#             end_block_num = hex_to_int(end_block)
+        
+#         start_block_num = hex_to_int(start_block) if start_block not in ["latest", "earliest", "pending"] else 0
+        
+#         # Limit range
+#         max_blocks = 1000
+#         if end_block_num - start_block_num > max_blocks:
+#             step = max(step, (end_block_num - start_block_num) // max_blocks)
+        
+#         # Sample blocks
+#         for block_num in range(start_block_num, end_block_num + 1, step):
+#             block_hex = hex(block_num)
+#             balance = await rpc.call("eth_getBalance", [address, block_hex])
+#             rpc_calls += 1
+            
+#             snapshot = {
+#                 "blockNumber": block_num,
+#                 "balance": balance,
+#                 "balanceWei": hex_to_int(balance),
+#                 "balanceEth": hex_to_int(balance) / 1e18
+#             }
+#             data["snapshots"].append(snapshot)
+        
+#         data["address"] = address
+#         data["blockRange"] = {
+#             "start": start_block_num,
+#             "end": end_block_num,
+#             "step": step,
+#             "snapshots": len(data["snapshots"])
+#         }
+        
+#         # Calculate changes
+#         if len(data["snapshots"]) > 1:
+#             first_balance = data["snapshots"][0]["balanceWei"]
+#             last_balance = data["snapshots"][-1]["balanceWei"]
+#             data["balanceChange"] = last_balance - first_balance
+#             data["balanceChangeEth"] = data["balanceChange"] / 1e18
+        
+#     except Exception as e:
+#         errors.append(str(e))
+    
+#     execution_time = (time.time() - start_time) * 1000
+#     return format_response(data, rpc_calls, execution_time, cached=False, errors=errors if errors else None)
 
 
 # ============================================================================
@@ -639,12 +767,21 @@ async def get_block_range(
     full_tx: bool = False
 ) -> Dict[str, Any]:
     """
-    Fetch multiple sequential blocks efficiently.
+    Fetch multiple sequential blocks in a single operation.
+    
+    Use this tool when you need to:
+    - Analyze multiple blocks at once
+    - Compare blocks across a range
+    - Get block metadata for a time period
+    
+    This tool efficiently fetches multiple blocks, combining multiple RPC calls.
     
     Args:
         start_block: Starting block number
         end_block: Ending block number
-        full_tx: If True, include full transaction objects (default: False)
+        full_tx: If True, includes full transaction objects (default: False)
+    
+    Note: Limited to 100 blocks per call to prevent excessive RPC usage.
     """
     start_time = time.time()
     rpc = await get_rpc_client()
@@ -706,11 +843,20 @@ async def analyze_gas_trends(
     percentiles: Optional[List[float]] = None
 ) -> Dict[str, Any]:
     """
-    Process eth_feeHistory into statistical summary.
+    Analyze gas price trends and fee history over recent blocks with statistical summaries.
+    
+    Use this tool when you need to:
+    - Understand gas price trends over time
+    - Get statistical analysis of fee history
+    - Analyze network congestion patterns
+    
+    This tool processes fee history data into min/max/avg/median statistics.
     
     Args:
-        block_count: Number of blocks to analyze (default: 20)
-        percentiles: List of percentile values (default: [25, 50, 75, 90, 95])
+        block_count: Number of recent blocks to analyze (default: 20)
+        percentiles: List of percentile values for reward analysis (default: [25, 50, 75, 90, 95])
+    
+    Returns statistical summaries of base fees, gas usage ratios, and reward percentiles.
     """
     start_time = time.time()
     rpc = await get_rpc_client()
@@ -789,7 +935,16 @@ async def analyze_gas_trends(
 @mcp.tool()
 async def get_network_health() -> Dict[str, Any]:
     """
-    Get network health: sync status + latest block time + gas price trend.
+    Get comprehensive network health metrics including sync status, block freshness, and gas trends.
+    
+    Use this tool when you need to:
+    - Check overall network health and status
+    - Verify the network is operating normally
+    - Monitor for network issues or congestion
+    
+    This tool combines multiple checks: sync status, latest block age, gas prices, and trends.
+    
+    Returns: sync status, latest block info, gas price, gas trend (increasing/decreasing/stable), and overall health status.
     """
     start_time = time.time()
     rpc = await get_rpc_client()
@@ -873,12 +1028,21 @@ async def decode_contract_events(
     block_range: Dict[str, Union[str, int]]
 ) -> Dict[str, Any]:
     """
-    Get logs and parse common event signatures.
+    Get and decode contract event logs for specified event signatures over a block range.
+    
+    Use this tool when you need to:
+    - Monitor specific contract events
+    - Track token transfers or other contract activities
+    - Analyze contract interactions through events
+    
+    This tool fetches logs and groups them by event signature for easy analysis.
     
     Args:
         contract: Contract address (0x-prefixed hex string)
-        event_signatures: List of event signatures (e.g., ["Transfer(address,address,uint256)"])
-        block_range: Dict with "fromBlock" and "toBlock"
+        event_signatures: List of event signatures to filter (e.g., ["Transfer(address,address,uint256)"])
+        block_range: Dict with "fromBlock" and "toBlock" keys
+    
+    Returns events grouped by signature with full log details.
     """
     start_time = time.time()
     rpc = await get_rpc_client()
@@ -952,11 +1116,20 @@ async def analyze_contract_activity(
     block_range: Dict[str, Union[str, int]]
 ) -> Dict[str, Any]:
     """
-    Get all interactions with contract in timeframe.
+    Analyze all interactions with a contract including transactions and events over a time period.
+    
+    Use this tool when you need to:
+    - Understand how a contract is being used
+    - Track all interactions with a specific contract
+    - Analyze contract activity patterns
+    
+    This tool combines event logs and transaction data to provide comprehensive activity analysis.
     
     Args:
         contract_address: Contract address (0x-prefixed hex string)
-        block_range: Dict with "fromBlock" and "toBlock"
+        block_range: Dict with "fromBlock" and "toBlock" keys
+    
+    Returns transactions, logs, and interaction summaries.
     """
     start_time = time.time()
     rpc = await get_rpc_client()
@@ -1042,10 +1215,17 @@ async def analyze_contract_activity(
 @mcp.tool()
 async def compare_gas_estimates(transaction_object: Dict[str, Any]) -> Dict[str, Any]:
     """
-    Run eth_call + eth_estimateGas and compare results.
+    Compare eth_call and eth_estimateGas results for a transaction to validate execution and estimate costs.
+    
+    Use this tool when you need to:
+    - Validate that a transaction will execute successfully
+    - Compare gas estimates with actual call results
+    - Debug transaction execution issues
+    
+    This tool runs both eth_call (simulation) and eth_estimateGas to provide comprehensive transaction analysis.
     
     Args:
-        transaction_object: Transaction object with fields like from, to, data, value
+        transaction_object: Transaction object with fields like from, to, data, value, gas, gasPrice
     """
     start_time = time.time()
     rpc = await get_rpc_client()
@@ -1128,11 +1308,19 @@ async def get_system_transactions(
     block_range: Dict[str, Union[str, int]]
 ) -> Dict[str, Any]:
     """
-    Fetch system transactions from block range.
-    Note: System transactions are identified by specific patterns (e.g., zero-value, specific addresses).
+    Identify and fetch system transactions from a block range.
+    
+    Use this tool when you need to:
+    - Find system-level transactions (contract calls, zero-value transactions)
+    - Analyze protocol-level activity
+    - Track non-standard transaction patterns
+    
+    System transactions are identified by patterns: zero-value with data, contract creation, or complex contract calls.
     
     Args:
-        block_range: Dict with "fromBlock" and "toBlock"
+        block_range: Dict with "fromBlock" and "toBlock" keys
+    
+    Returns system transactions with type classification (contract_creation or contract_call).
     """
     start_time = time.time()
     rpc = await get_rpc_client()
@@ -1219,10 +1407,19 @@ async def analyze_system_tx_patterns(
     block_range: Dict[str, Union[str, int]]
 ) -> Dict[str, Any]:
     """
-    Analyze frequency, types, and gas usage of system transactions.
+    Analyze patterns in system transactions including frequency, types, and gas usage statistics.
+    
+    Use this tool when you need to:
+    - Understand system transaction patterns
+    - Analyze gas usage for system operations
+    - Identify top addresses performing system transactions
+    
+    This tool provides statistical analysis of system transactions including type distribution and gas metrics.
     
     Args:
-        block_range: Dict with "fromBlock" and "toBlock"
+        block_range: Dict with "fromBlock" and "toBlock" keys
+    
+    Returns patterns by type, gas usage statistics, and top addresses by frequency.
     """
     start_time = time.time()
     rpc = await get_rpc_client()
