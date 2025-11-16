@@ -141,6 +141,34 @@ class CoreWriterLogProcessor:
             },
         }
 
+
+
+
+# returns this type (vault: address, isDeposit: bool, usd: int)
+def get_vault_transfers() -> List[Dict[str, Any]]:
+    return [
+        {
+            "vault": "0x1234567890123456789012345678901234567890",
+            "isDeposit": True,
+            "usd": 1000000000000000000
+        }
+    ]
+
+
+# returns this type (validator: address, wei: int, isUndelegate: bool)
+def get_delegations() -> List[Dict[str, Any]]:
+    return [
+        {
+            "validator": "0x1234567890123456789012345678901234567890",
+            "isUndelegate": False,
+            "wei": 1000000000000000000
+        }
+    ]
+
+
+
+
+
 def process_logs(
     start_block_height: int,
     end_block_height: int,
